@@ -2659,64 +2659,22 @@ return channel.send("**`افضل موقع بيديك حسابات مجانا ل�
       }}).then(msg => {msg.delete(3000)});
                           }
 });
-  client.on("message",  message => {
-         let args = message.content.split(' ').slice(1);
-    if(message.content.startsWith(prefix + 'nickname')) {
-        if (!message.member.hasPermission("MANAGE_NICKNAMES")) {
-            message.channel.send("حط الاسم")
-        } else {
-            if (!message.guild.member(client.user).hasPermission('MANAGE_NICKNAMES')) return message.reply(' :x:البوت ما عنده خاصية MANAGE_NICKNAMES.').catch(console.error);
-            let changenick = message.mentions.users.first();
-            let username = args.slice(1).join(' ')
-            if (username.length < 1) return message.reply('حط الاسم').catch(console.error);
-            if (message.mentions.users.size < 1) return message.author.send('You must mention a user to change their nickname. :x:').catch(console.error);
-            message.guild.member(changenick.id).setNickname(username);
-            message.channel.send("تم تغيير الاسم الى: " + changenick + "")
-        }
-    }});
-	const translate = require('google-translate-api');
-const Langs = ['afrikaans', 'albanian', 'amharic', 'arabic', 'armenian', 'azerbaijani', 'bangla', 'basque', 'belarusian', 'bengali', 'bosnian', 'bulgarian', 'burmese', 'catalan', 'cebuano', 'chichewa', 'chinese simplified', 'chinese traditional', 'corsican', 'croatian', 'czech', 'danish', 'dutch', 'english', 'esperanto', 'estonian', 'filipino', 'finnish', 'french', 'frisian', 'galician', 'georgian', 'german', 'greek', 'gujarati', 'haitian creole', 'hausa', 'hawaiian', 'hebrew', 'hindi', 'hmong', 'hungarian', 'icelandic', 'igbo', 'indonesian', 'irish', 'italian', 'japanese', 'javanese', 'kannada', 'kazakh', 'khmer', 'korean', 'kurdish (kurmanji)', 'kyrgyz', 'lao', 'latin', 'latvian', 'lithuanian', 'luxembourgish', 'macedonian', 'malagasy', 'malay', 'malayalam', 'maltese', 'maori', 'marathi', 'mongolian', 'myanmar (burmese)', 'nepali', 'norwegian', 'nyanja', 'pashto', 'persian', 'polish', 'portugese', 'punjabi', 'romanian', 'russian', 'samoan', 'scottish gaelic', 'serbian', 'sesotho', 'shona', 'sindhi', 'sinhala', 'slovak', 'slovenian', 'somali', 'spanish', 'sundanese', 'swahili', 'swedish', 'tajik', 'tamil', 'telugu', 'thai', 'turkish', 'ukrainian', 'urdu', 'uzbek', 'vietnamese', 'welsh', 'xhosa', 'yiddish', 'yoruba', 'zulu'];
+var cats = [
 
-client.on('message', message => {
-if (message.content.startsWith(prefix + 'translate')) {
-    let args = message.content.split(" ").slice(1);
-    if (!args[0]) {
-    
-        const embed = new Discord.RichEmbed()
-            .setColor("FFFFFF")
-            .setDescription("**ترجمة الكتابة.**\استعمل: `+translate <الكمة لتبي> <االغة>`");
-
-        return message.channel.send(embed);
-
-    } else {
-
-        if (args.length === undefined) {
-
-            return message.channel.send("**ترجمة الكتابة.**\استعمل: `+translate <الكمة لتبي> <االغة>`");
-
-        } else {
-
-            let transArg = args[0].toLowerCase();
-
-            args = args.join(' ').slice(1)
-            let translation;
-
-            if (!Langs.includes(transArg)) return message.channel.send(`**Language not found.**`);
-            args = args.slice(transArg.length);
-
-            translate(args, {
-                to: transArg
-            }).then(res => {
-
-                const embed = new Discord.RichEmbed()
-                    .setAuthor("Translator", client.user.displayAvatarURL)
-                    .addField(`Input`, `\`\`\`${args}\`\`\``)
-                    .setColor("#42f4c8")
-                    .addField(`Output`, `\`\`\`${res.text}\`\`\``);
-                return message.channel.send(embed);
-            });
-        }
+"https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg",
+"https://www.petfinder.com/wp-content/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg",
+"http://www.i-love-cats.com/images/2015/04/12/cat-wallpaper-38.jpg",
+"https://www.aspca.org/sites/default/files/cat-care_urine-marking_main-image.jpg",
+"https://vignette1.wikia.nocookie.net/houseofnight/images/8/8b/Cats.jpg/revision/latest?cb=20130812053537",
+"https://s-media-cache-ak0.pinimg.com/originals/f0/3b/76/f03b7614dfadbbe4c2e8f88b69d12e04.jpg",
+"http://www.rd.com/wp-content/uploads/sites/2/2016/04/15-cat-wants-to-tell-you-attention.jpg"
+]
+    client.on('message', message => {
+        var args = message.content.split(" ").slice(1);
+    if(message.content.startsWith('!cat')) {
+         var cat = new Discord.RichEmbed()
+.setImage(cats[Math.floor(Math.random() * cats.length)])
+message.channel.sendEmbed(cat);
     }
-}
 });
 client.login(process.env.BOT_TOKEN)
