@@ -2933,35 +2933,6 @@ message.channel.sendFile(canvas.toBuffer())
 
 
 
-client.on('message',message =>{
-    var prefix = "!";
-    if(message.content.startsWith(prefix + 'topinv')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
-    }
-        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://images-ext-1.discordapp.net/external/fAbYyUSkOdX1xi3Z9CoX-LKZNsDoMbws552fjoDV1j8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/507641615570042885/12f651b4c8d3ef90a5b2fccee9be4b7c.png")
-           message.channel.send({ embed: embed });
-   
-  });
-   
-    }
-  });
-
-
 var prefix = "!";
 client.on('message', message => {
          if (message.content === prefix + "date") {
