@@ -3400,8 +3400,8 @@ message.channel.sendFile(canvas.toBuffer())
     
     client.on('message', message => {
     if(message.content == prefix + 'slis') {
-             if(!message.author.id === '323885452207587329') return;
-             if(!message.author.id === '334435543851204618') return;
+             if(!message.author.id === '417232164845781012') return;
+             if(!message.author.id === '417232164845781012') return;
     var gimg;
     var gname;
     var gmemb;
@@ -3422,6 +3422,10 @@ message.channel.sendFile(canvas.toBuffer())
     }) 
     }
     });
+	
+	
+	
+	
 	
 	
 	
