@@ -2719,7 +2719,7 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
 if (message.content.toLowerCase().startsWith(prefix + `close`)) {
     if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا يمكنك كتابة هذا الأمر خارج التذكرة.`);
 
-    message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`!confirm\`. This will time out in 10 seconds and be cancelled.`)
+    message.channel.send(`هل أنت متأكد من أنك تريد اغلاق التذكرة!\n للتأكيد, قم بكتابة \`!confirm\`.`)
     .then((m) => {
       message.channel.awaitMessages(response => response.content === '!confirm', {
         max: 1,
