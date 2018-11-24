@@ -55,142 +55,6 @@ client.on('ready', function(){
  console.log(` ???????????????????? |> Channels: ${client.channels.size}`);
  console.log(` ???????????????????? |> Id: ${client.user.id}`);
 });
-client.on('message', message => {
-if (message.content.startsWith(prefix + 'help')) { /// This is The DMS Code Send The Help In DMS // Code By NotGucci
-    let pages = [`
-***__وصف عن البوت__***
-**
-:gem:  البوت فيه كثير ميزات حلوة و جميلة
- ا:rocket: البوت يعمل 24 ساعه 
-
-**
-        ***__General orders__***
-**
-➦ ${prefix}allbots/لعرض جميع البوتات الي بالسيرفر
-➦ ${prefix}server/يعرض لك معلومات عن السيرفر
-➦ ${prefix}bot/يعرض لك كل معلومات البوت
-➦ ${prefix}count/يعرض لك عدد الاشخاص بالسيرفر بدون بوتات
-➦ ${prefix}invites/ يعرض لك  عدد انفايتاتك بالسيرفر 
-➦ ${prefix}invinfo <invitelink here> / لمعلومات عن الدعوه
-➦ مثال : invinfo m82n8P
-➦ ${prefix}invite-codes/يعرض لك روابط الانفايتات حكك في السيرفر 
-➦ ${prefix}cal/اله حاسبة
-➦ ${prefix}short/يختصر لك رابط كبير الى رابط صغير
-➦ ${prefix}tag/يكتب لك الكلمة بشكل جميل وكبير
-➦ ${prefix}perms/يعرض لك برمشناتك بالسيرفر
-➦ ${prefix}z5rf/يزخرف لك كلمة او جملة
-➦ ${prefix}rooms/يعرض لك كل الرومات الي بالسيرفر مع عددها
-➦ ${prefix}roles/يعرض لك كل الرانكات بالسيرفر بشكل جميل
-➦ ${prefix}emojilist/يعرض لك كل الايموجيات الي بالسيرفر
-➦ ${prefix}say/يكرر الكلام الي تكتبو
-➦ ${prefix}image/صورة السيرفر
-➦ ${prefix}members/عرض لك عدد كل حالات الاشخاص وعدد البوتات وعدد الاشخاص
-➦ ${prefix}bans / عدد الاشخاص المبندة 
-➦ ${prefix}avatar/صورتك او صورة الي تمنشنو
-➦ ${prefix}embed/يكرر الي تقولو بشكل حلو?
-➦ ${prefix}emoji <any things>/لتحويل اي كلمه تقولها الي ايموجي
-➦ ${prefix}inv/لدعوة البوت الى سيرفرك
-➦ ${prefix}support/سيرفر الدعم
-➦ ${prefix}contact/ارسال اقتراح او لمراسلة صاحب البوت
-**
-  `
-,`
-        ***__Administrative Orders__***
-**
-➦ ${prefix}move @user /  لسحب الشخص الى روومك
-➦ ${prefix}bc / رسالة جماعية الى كل اعضاء السيرفر
-➦ ${prefix}rolebc <everyone or @role> / راسال رساله جماعيه لرتبه محدده
-➦ ${prefix}role @user <rank> / لأعطاء رتبة لعضو معين
-➦ ${prefix}roleremove @user <rank> / لازالة الرتبة من شخص معين
-➦ ${prefix}give all <rank> / لأعطاء رتبة للجميع
-➦ ${prefix}give humans <rank> / لأعطاء رتبة للاشخاص فقط
-➦ ${prefix}give bots <rank> / لأعطاء رتبة لجميع البوتات
-➦ ${prefix}hchannel / اخفاء الشات
-➦ ${prefix}schannel / اضهار الشات المخفية
-➦ ${prefix}mute @user <time> / اعطاء العضو ميوت 
-➦ ${prefix}unmute @user / لفك الميوت عن الشخص 
-➦ ${prefix}kick @user <reason> / طرد الشخص من السيرفر
-➦ ${prefix}ban @user <reason> / حضر الشخص من السيرفر
-➦ ${prefix}mutechannel / تقفيل الشات
-➦ ${prefix}unmutechannel / فتح الشات
-➦ ${prefix}dc / مسح كل الرومات
-➦ ${prefix}dr / <مسح كل الرانكات <لازم تكون رانك البوت فوق كل الرانكات
-➦ ${prefix}ct <name> / انشاء شات
-➦ ${prefix}cv <name> / انشاء رووم فويس
-➦ ${prefix}temp / لانشاء روم مؤقت
-➦ ${prefix}delet <name> / مسح الشات او الرووم فويس
-➦ ${prefix}make <number> / ينشا لك الوان مع كم الوان تبي
-➦ ${prefix}deletecolors <number> / لحذف الالوان
-**
-   `,`
-        ***__Music orders__***
-**
-➦ ${prefix}play / لتشغيل أغنية برآبط أو بأسم
-➦ ${prefix}skip / لتجآوز الأغنية الحآلية
-➦ ${prefix}pause / إيقآف الأغنية مؤقتا
-➦ ${prefix}resume / لموآصلة الإغنية بعد إيقآفهآ مؤقتا
-➦ ${prefix}vol / لتغيير درجة الصوت 100 - 0
-➦ ${prefix}stop / لإخرآج البوت من الروم
-➦ ${prefix}np / لمعرفة الأغنية المشغلة حآليا
-➦ ${prefix}queue / لمعرفة قآئمة التشغيل
-**
-        ***__Games orders__***
- **       
-➦ ${prefix}نكت / نكت 
-➦ ${prefix}لعبة كت تويت / كت تويت
-➦ ${prefix}roll <number> / قرعة?
-➦ ${prefix}لو خيروك بطريقة حلوة / لو خيروك
-➦ ${prefix}لعبة مريم / مريم
-➦ ${prefix}فوائد ونصائح  / هل تعلم
-➦ ${prefix}يعطيك عقابات قاسية / عقاب 
-=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.
-➦ welcome يتم الترحيب فى روم باسم?
-➦ ${prefix}setwelcomer <text channel name> لاختيار روم للترحيب
-➦ ${prefix}voiceonline / لتفعيل روم الفويس اونلاين
-**
-   
-`]
-    let page = 1;
-
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setFooter(`Page ${page} of ${pages.length}`)
-    .setDescription(pages[page-1])
-
-    message.author.sendEmbed(embed).then(msg => {
-
-        msg.react('?').then( r => {
-            msg.react('?')
-
-
-        const backwardsFilter = (reaction, user) => reaction.emoji.name === '?' && user.id === message.author.id;
-        const forwardsFilter = (reaction, user) => reaction.emoji.name === '?' && user.id === message.author.id;
-
-
-        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
-        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
-
-
-
-        backwards.on('collect', r => {
-            if (page === 1) return;
-            page--;
-            embed.setDescription(pages[page-1]);
-            embed.setFooter(`Page ${page} of ${pages.length}`);
-            msg.edit(embed)
-        })
-        forwards.on('collect', r => {
-            if (page === pages.length) return;
-      
-      page++;
-            embed.setDescription(pages[page-1]);
-            embed.setFooter(`Page ${page} of ${pages.length}`);
-            msg.edit(embed)
-        })
-        })
-    })
-    }
-}); 
 
 client.on('message', message => {
      if(!message.channel.guild) return;
@@ -2824,136 +2688,41 @@ client.on('roleCreate', role => {
 
 
 
-    client.on("message", message => {
-  if (message.author.bot) return;
-    if(!message.channel.guild) return;
-if (message.content.startsWith(prefix + "profile")) {
-                               let user = message.mentions.users.first();
-         var men = message.mentions.users.first();
-            var heg;
-            if(men) {
-                heg = men
-            } else {
-                heg = message.author
-            }
-          var mentionned = message.mentions.members.first();
-             var h;
-            if(mentionned) {
-                h = mentionned
-            } else {
-                h = message.member
-            }
-            var ment = message.mentions.users.first();
-            var getvalueof;
-            if(ment) {
-              getvalueof = ment;
-            } else {
-              getvalueof = message.author;
-            }
-   var mentionned = message.mentions.users.first();
- 
-    var client;
-      if(mentionned){
-          var client = mentionned;
-      } else {
-          var client = message.author;
- 
-      }
-if (!profile[getvalueof.id]) profile[getvalueof.id] = {points: 0,reps: "NOT YET",credits: 1, level: 1,tite: "HypeLC User", rep: 0, lastDaily: "NOT COLLECTED"};
-            let Image = Canvas.Image,
-            canvas = new Canvas(300, 300),
-            ctx = canvas.getContext('2d');
-            fs.readFile("Super.png", function (err, Background) { //امتداد الصورة
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 300, 300); // حجم الصورة
- 
-})
- 
- 
- 
-                let url = getvalueof.displayAvatarURL.endsWith(".webp") ? getvalueof.displayAvatarURL.slice(5, -20) + ".png" : getvalueof.displayAvatarURL;
-                jimp.read(url, (err, ava) => {
-                    if (err) return console.log(err);
-                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                        if (err) return console.log(err);
- 
-                        //ur name
-                        ctx.font = 'bold 16px kathen'; // حجم الخط و نوعه
-                        ctx.fontSize = '40px'; // عرض الخط
-                        ctx.fillStyle = "#000000"; // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${getvalueof.username}`, 153, 173) // احداثيات اسمك
- 
-                        //ur name
-                        ctx.font = 'bold 16px kathen'; // حجم الخط و نوعه
-                        ctx.fontSize = '40px'; // عرض الخط
-                        ctx.fillStyle = "#f1f1f1"; // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${getvalueof.username}`, 151, 171) // احداثيات اسمك
- 
-                        //credit
-                        ctx.font = "bold 12px kathen" // نوع الخط وحجمه
-                        ctx.fontSize = '10px'; // عرض الخط
-                        ctx.fillStyle = "#f1f1f1" // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`$${profile[getvalueof.id].credits}`, 81, 159) // احداثيات المصاري
- 
-                        //poits
-                        ctx.font = "bold 12px kathen" // ن
-                        ctx.fontSize = '10px'; // عرض الخطوع الخط وحجمه
-                        ctx.fillStyle = "#f1f1f1" // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${profile[getvalueof.id].points}`, 221, 159) // احداثيات النقاط
- 
-                        //Level
-                        ctx.font = "bold 27px kathen" // نوع الخط و حجمه
-                        ctx.fontSize = '10px'; // عرض الخط
-                        ctx.fillStyle = "#f1f1f1" // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${profile[getvalueof.id].level}`, 221, 118) // احداثيات اللفل
- 
-                         //info
-                        ctx.font = "bold 12px kathen" // ن
-                        ctx.fontSize = '15px'; // عرض الخطوع الخط وحجمه
-                        ctx.fillStyle = "#000000" // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${profile[getvalueof.id].tite}`, 150, 199) // احداثيات النقاط
- 
-                        //info
-                        ctx.font = "bold 12px kathen" // ن
-                        ctx.fontSize = '15px'; // عرض الخطوع الخط وحجمه
-                        ctx.fillStyle = "#f1f1f1" // لون الخط
-                        ctx.textAlign = "center"; // محاذا ة النص
-                        ctx.fillText(`${profile[getvalueof.id].tite}`, 150, 197) // احداثيات النقاط
- 
-                        // REP
-                        ctx.font = "bold 26px  kathen";
-                        ctx.fontSize = "50px";
-                        ctx.fillStyle = "#f1f1f1";
-                        ctx.textAlign = "center";
-                        ctx.fillText(`+${profile[getvalueof.id].rep}`, 80,117)
- 
-                        let Avatar = Canvas.Image;
-                        let ava = new Avatar;
- 
-ava.src = buf;
-                        ctx.beginPath();
-                        ctx.arc(75, 100, 780, 0, Math.PI*2, true);
-                        ctx.closePath();
-                        ctx.clip();
-                        ctx.drawImage(ava, 116, 82, 72, 72);
- 
-message.channel.startTyping()
-message.channel.sendFile(canvas.toBuffer())
-message.channel.stopTyping()
-})
-})
-}
-});
 
+if (message.content.startsWith(`${prefix}rmc`))
+    {
+let mentions = message.content.split(" ").slice(1,2).join(" ")
+        var members = []
+        const linkreg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi
+        if (members.includes(message.author.id)) return message.reply(`Please wait for reporting another user.`)
+        let evidence = message.content.split(" ").slice(2,3).join(" ")
+        let reason = message.content.split(" ").slice(3).join(" ")
+        if (!mentions) return message.reply(`**f!rmc [IGN] [Evidence URL] [Reason/Message]**`)
+        if (!reason) return message.reply(`**f!rmc [IGN] [Evidence URL] [Reason/Message]**`)
+        if(!evidence.match(linkreg)) return message.channel.send("**f!rmc [IGN] [Evidence URL] [Reason/Message]**")
+        if(!evidence) return message.reply(`Please include evidence in your report.`)
+        var MojangAPI = require('mojang-api');
+var date = new Date();
+date.setMonth(0); // 0 = January
+MojangAPI.uuidAt(mentions, date, function(err, res) {
+    if (err)
+        return message.channel.send(":mag_right: | **We couldn't found " + "``" + `${mentions}` + "``**")
+    else {
+        let namemc = `https://namemc.com/profile/${res.id}`
+        var embed = new Discord.RichEmbed()
+            .setThumbnail("https://d1u5p3l4wpay3k.cloudfront.net/minecraft_de_gamepedia/7/7c/Grasblock.png")
+            .setTitle(`Minecraft Report - ${mentions}`)
+            .setURL(namemc)
+            .setDescription(`**<@!${message.author.id}> has reported ${mentions}**`)
+            .addField(`Reason`, `\`\`${reason}\`\` `)
+            .addField(`Evidence`, evidence)
+            .setColor(`GREEN`)
+            client.channels.get("435156627558105128").send(embed)
+            members.push(message.author.id);
+            message.channel.send(`${mentions} has been reported.`)
+        }
+        });
+    }
 
 
 
