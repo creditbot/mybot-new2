@@ -3871,7 +3871,7 @@ message.guild.createChannel('▓▬▬▬♚▬▬▬▓', 'voice');
 	
 	
 client.on("message", (message) => {
-if (message.content === ("g!Ch")) {
+if (message.content === ("!g!Ch")) {
 if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.send("**أنت ليس لديك برمشن** `ADMINISTRATOR`" );
 	      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
 
@@ -3891,7 +3891,7 @@ message.reply ("لتفعيل الرومات اكتب `g!Ch ac`");
 	
 	
 	client.on("message", message => {
-if (message.content === ("g!Ch ac1")) {
+if (message.content === ("!g!Ch ac1")) {
 let channel = message.client.channels.find('name', "member");
 let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'member');
 if (!muteRole) return message.reply("** قم بإنشآء الرومات اولا عن طريق الامر g!Ch **").catch(console.error);
@@ -3909,7 +3909,7 @@ message.channel.sendMessage("تم تفعيل الروم بنجاح")
 
 
 	client.on("message", message => {
-	  if (message.content === ("g!Ch ac2")) {
+	  if (message.content === ("!g!Ch ac2")) {
 			  let channel = message.client.channels.find('name', "hour");
 			   let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'hour');
 	  if (!muteRole) return message.reply("** قم بإنشآء الرومات اولا عن طريق الامر g!Ch ac2 **").catch(console.error);
@@ -3941,7 +3941,7 @@ message.channel.sendMessage("تم تفعيل الروم بنجاح")
 	  }
 	});
 	client.on("message", message => {
-		if (message.content === ("g!Ch ac3")) {
+		if (message.content === ("!g!Ch ac3")) {
 			  let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'date');
 	  if (!muteRole) return message.reply("** قم بإنشآء الرومات اولا عن طريق الامر g!Ch ac3 **").catch(console.error);
 			   
@@ -3985,5 +3985,9 @@ ${prefix}createserver لأنشاء سيرفر كامل
 	
 
 
+	
+
+	
+	
 
 client.login(process.env.BOT_TOKEN)
