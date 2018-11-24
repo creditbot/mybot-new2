@@ -814,27 +814,6 @@ omar.reply("`تم حذف جميع الرتب بنجاح`")
 }// omar jedol / Codes
 });
 client.on("message", (message) => {
-let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-if (command == "ct") {
-            if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
-        let args = message.content.split(" ").slice(1);
-    message.guild.createChannel(args.join(' '), 'text');
-message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
-
-}
-});
-client.on("message", (message) => {
-     let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-if (command == "cv") {
-            if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
-        let args = message.content.split(" ").slice(1);
-    message.guild.createChannel(args.join(' '), 'voice');
-message.channel.sendMessage('تم انشاء روم صوتى')
-}
-});
-client.on("message", (message) => {
     let command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
 if (command == "delete") {
@@ -3604,114 +3583,50 @@ mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${arg
 	
 	
 	
-		client.on('message', async msg => {
-	var prefix = "!";
-	var user = msg.author;
-			var a = msg.guild.roles.find("name", 'Agar');
-		if(!a){
-        a = await msg.guild.createRole({
-		  name: "Agar",
-          color: "#ffffff",
-          permissions:[]
-		})
-		
-        }
-	    var m = msg.guild.roles.find("name", 'Minecraft');
-	if(!m){
-        m =  await msg.guild.createRole({
-		  name: "Minecraft",
-          color: "#ffffff",
-          permissions:[]
-		})
-        }
-        var f = msg.guild.roles.find("name", 'Fortnite');
-		if(!f){
-        f =  await msg.guild.createRole({
-		  name: "Fortnite",
-          color: "#ffffff",
-          permissions:[]
-		})
-        }
-        var b = msg.guild.roles.find("name", 'Brawlhalla');
-		if(!b){
-        b =  await msg.guild.createRole({
-		  name: "Brawlhalla",
-          color: "#ffffff",
-          permissions:[]
-		})
-        }
-        var black = msg.guild.roles.find("name", 'Blacksquad');
-	if(!black){
-        black =  await msg.guild.createRole({
-		  name: "Blacksquad",
-          color: "#ffffff",
-          permissions:[]
-		})
-        }
-
-		if (msg.content.startsWith(prefix +'addmerole')) {
-
-		if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-msg.channel.send(`يرحي اختيار رتبة اللعبة الذي تريدها \n1- لعبة اقاريو ⚽ \n2- لعبة ماين كرافت 👶 \n3- لعبة فورت نايت 👊 \n4- لعبة براوهلا  👌 \n5- لعبة بلاك سكواد 🍸\n6- الغاء ❌ \n7- **لديك60 ثانية للاختيار **\n<@${msg.author.id}>`).then(res => {     
-     res.react('⚽').then(r=>{     
-     res.react('👶').then(r=>{
-     res.react('👊').then(r=>{
-     res.react('👌').then(r=>{
-     res.react('🍸').then(r=>{
-     res.react('❌').then(r=>{
-
-    let aaa = (reaction, user) => reaction.emoji.name === '⚽' && user.id === msg.author.id;    
-    let mmm = (reaction, user) => reaction.emoji.name === '👶' && user.id === msg.author.id;
-    let fff = (reaction, user) => reaction.emoji.name === '👊' && user.id === msg.author.id;
-    let bbb = (reaction, user) => reaction.emoji.name === '👌' && user.id === msg.author.id;
-    let bbbb = (reaction, user) => reaction.emoji.name === '🍸' && user.id === msg.author.id;
-    let ccc = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
-
-    let aa = res.createReactionCollector(aaa, { maxMatches:1 , time: 20000 , });
-    let mm = res.createReactionCollector(mmm, { maxMatches:1 , time: 20000 , });
-    let ff = res.createReactionCollector(fff, { maxMatches:1 , time: 20000 , });
-    let bb = res.createReactionCollector(bbb, { maxMatches:1 , time: 20000 , });
-    let bl = res.createReactionCollector(bbbb,{ maxMatches:1 , time: 20000 , });
-    let cc = res.createReactionCollector(ccc, { maxMatches:1 , time: 20000 , });
-
-aa.on("collect", r => {
-    msg.guild.member(user.id).addRole(a);
-	msg.channel.send('`تم اعطائك رتبة للعبة Agar`');
-	msg.delete();
-	})
-mm.on("collect", r => {
-    msg.guild.member(user.id).addRole(m);
-	msg.channel.send('`تم اعطائك رتبة للعبة Mincraft `');
-	msg.delete();
+	
+	
+	
+	client.on('message', msg => {
+  if(!msg.guild) return;
+    if (msg.content.startsWith(prefix +'cv')) {
+     let args = msg.content.split(" ").slice(1);
+    if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+let ra3d = new Discord.RichEmbed()
+.setColor('RANDOM')
+.setThumbnail(msg.author.avatarURL)
+.setDescription(`هل انت متاكد من انشاء روم صوتي ؟\n  ✅  \n  ❌ \n  لديك 60 ثانية للاختيار`)                                                                                                                                                                       
+msg.channel.send(ra3d).then(message => {
+ message.react('✅').then(r=>{
+ message.react('❌').then(r=>{           
+ let eyadandr3d = (reaction, user) => reaction.emoji.name === '✅' && user.id === msg.author.id;
+ let eyadandr3dd = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
+ let tt  = message.createReactionCollector(eyadandr3d, { time: 60000 });
+ let er  = message.createReactionCollector(eyadandr3dd, { time: 60000 });
+er.on("collect", r => {
+msg.channel.send("`تم الالغاء`")
+message.delete();
 })
-ff.on("collect", r => {
-    msg.guild.member(user.id).addRole(f);
-	msg.channel.send('`تم اعطائك رتبة للعبة Fortnite `');
-	msg.delete();
+tt.on("collect", r => {
+msg.guild.createChannel(args.join(' '), 'voice').then(ra3deyad => {
+channelCreated = ra3deyad.createdAt
+      const embed = new Discord.RichEmbed()
+  .setColor('RANDOM')
+  .setImage()
+  .setThumbnail('https://cdn.discordapp.com/attachments/453024271560867853/455104628674134017/1500920527.jpg')
+  .setURL('')
+  .addField(`اسم القناة`, `${ra3deyad.name}`, true)
+  .addField(`أيدي القناة`, `${ra3deyad.id}`, true)
+  .addField(`نوع القناة`, `${ra3deyad.type}`, true)
+  .addField(`متى انشأت القناة`, `${channelCreated}`)
+ msg.channel.send({embed})
+    message.delete();
 })
-bb.on("collect", r => {
-    msg.guild.member(user.id).addRole(b);
-	msg.channel.send('`تم اعطائك رتبة للعبة Brawlhalla `');
-	msg.delete();
 })
-bl.on("collect", r => {
-    msg.guild.member(user.id).addRole(black);
-	msg.channel.send('`تم اعطائك رتبة للعبة Blacksquad `');
-	msg.delete();
 })
-cc.on("collect", r => {
-	msg.delete();
 })
-	 })
-	 })
-	 })
-	 })
-	 })
-	 })
-	 })
-	 }
-	 });
-
+})
+}
+});
 	
 	
 	
