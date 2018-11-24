@@ -2659,121 +2659,19 @@ return channel.send("**`افضل موقع بيديك حسابات مجانا ل�
       }}).then(msg => {msg.delete(3000)});
                           }
 });
-client.on('message', message => {
-      if (message.content.startsWith("!id")) {
-      if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات :x:`);
-      message.guild.fetchInvites().then(invs => {
-      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
-      let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
-      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-      var moment = require('moment');
-      var args = message.content.split(" ").slice(1);
-let user = message.mentions.users.first();
-var men = message.mentions.users.first();
- var heg;
- if(men) {
-     heg = men
- } else {
-     heg = message.author
- }
-var mentionned = message.mentions.members.first();
-  var h;
- if(mentionned) {
-     h = mentionned
- } else {
-     h = message.member
- }
-        moment.locale('ar-TN');
-      var id = new  Discord.RichEmbed()
-       
-    .setColor("#8650a7")
-    .setAuthor(message.author.username, message.author.avatarURL) 
-.addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
-.addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
-.addField(': عدد الدعوات', inviteCount,false)
-    message.channel.sendEmbed(id);
-})
-}
-     });
-	 client.on('message', message => {
-if(message.content.startsWith(prefix + "slots")) {
-let slot1 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
-let slot2 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
-let slot3 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
-let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
-let slots2 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
-let slots3 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
-let we;
-if(slots1 === slots2 && slots2 === slots3) {
-we = "Win, GG."
-} else {
-we = "Lose :'("
-}
-message.channel.send(`${slots1} | ${slots2} | ${slots3} - ${we}`)
-}
+const moment = require("moment")
+client.on("guildMemberAdd", m => {
+    if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 8) {
+        m.ban();
+    };
+    function parseDate(str) {
+        var mdy = str.split('/');
+        return new Date(mdy[2], mdy[0]-1, mdy[1]);
+    };
+   
+    function datediff(first, second) {
+        return Math.round((second-first)/(1000*60*60*24));
+    };
 });
 
-client.on('message', message => {
-         if (message.content === prefix + "date") {
-         if (!message.channel.guild) return message.reply('** This command only for servers **');  
-         var currentTime = new Date(),
-            hours = currentTime.getHours() + 4 ,
-            hours2 = currentTime.getHours() + 3 ,
-            hours3 = currentTime.getHours() + 2 ,
-            hours4 = currentTime.getHours() + 3 ,
-            minutes = currentTime.getMinutes(),
-            seconds = currentTime.getSeconds(),
-            Year = currentTime.getFullYear(),
-            Month = currentTime.getMonth() + 1,
-            Day = currentTime.getDate();
-             var h = hours
-  if(hours > 12) {
-               hours -= 12;
-            } else if(hours == 0) {
-                hours = "12";
-            }  
-             if(hours2 > 12) {
-               hours2 -= 12;
-            } else if(hours2 == 0) {
-                hours2 = "12";
-            
-            }  
-                         if(hours3 > 12) {
-               hours3 -= 12;
-            } else if(hours3 == 0) {
-                hours3 = "12";
-            } 
-            if (minutes < 10) {
-                minutes = '0' + minutes;
-            }
-
-            var suffix = 'صباحاَ';
-            if (hours >= 12) {
-                suffix = 'مساء';
-                hours = hours - 12;
-            }
-            if (hours == 0) {
-                hours = 12;
-            }
- 
-
-                var Date15= new Discord.RichEmbed()
-                .setThumbnail("https://i.imgur.com/ib3n4Hq.png") 
-                .setTitle( "『التاريخ  والوقت』")
-                .setColor('RANDOM')
-                .setFooter(message.author.username, message.author.avatarURL)
-                .addField('الامارات',
-                "『"+ hours + ":" + minutes +":"+ seconds + "』")
-                 .addField('مكه المكرمه',
-                "『"+ hours2 + ":" + minutes +":"+ seconds  + "』") 
-                .addField('مصر',
-                "『"+ hours3 + ":" + minutes +":"+ seconds  + "』") 
-                
-                .addField('التاريخ',
-                "『"+ Day + "-" + Month + "-" + Year +  "』")
-
-                 message.channel.sendEmbed(Date15);
-        }
-    });
-	
 client.login(process.env.BOT_TOKEN)
