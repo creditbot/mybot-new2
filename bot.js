@@ -3881,7 +3881,6 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.sen
 message.channel.sendMessage('**تم إنشاء روم ساعة :small_orange_diamond:**');
 message.channel.sendMessage('**تم إنشاء روم تاريخ :small_orange_diamond:**');
 message.channel.sendMessage('**تم إنشاء روم عداد الأعضآء :small_orange_diamond:**');
-message.reply ("لتفعيل الرومات اكتب `g!Ch ac`");  
 }
 });
 	
