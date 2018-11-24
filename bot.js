@@ -4027,7 +4027,7 @@ if(!gg) return;
 if(gg) {
 gg.send({embed : new Discord.RichEmbed()
 .setDescription(`**ماذا تريد:scroll: » \n ${lan}\nكم تدفع :moneybag: » \n ${md} \n من الذي تشتري منه :round_pushpin: » \n ${br}  \n تم التقديم بوسطة :top: » <@${message.author.id}> **`)  
-          .setFooter(`Mal,Shop Team♥`)
+          .setFooter(`Rqmi,System Team♥`)
 .setTimestamp()
 });
 }        
