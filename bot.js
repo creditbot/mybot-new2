@@ -2738,21 +2738,9 @@ client.on('message',async message => {
 
 
 
-
-
-
-
-client.on("message", message => {
-  if (message.content === "!help") {
-         message.react("?")
-            message.react("??")
-   const embed = new Discord.RichEmbed() 
-       .setColor("#ffff00")
-       .setDescription(`
- 
-
-
-
+	
+	
+	
 	client.on('message', message => {
     
   if (message.content.startsWith ("!id")) {
@@ -2769,7 +2757,7 @@ let args = message.content.split(' ').slice(1).join(' ');
            defineduser = firstMentioned;
        }
 
-       const w = ['./img/id6.png','./img/id2.png','./img/id3.png','./img/id41.png','./img/id5.png'];
+       const w = ['./id6.png','./id2.png','./id3.png','./id41.png','./id5.png'];
        var Canvas = require('canvas')
 var jimp = require('jimp')
 
@@ -2945,6 +2933,13 @@ message.channel.sendFile(canvas.toBuffer())
 }
 
 })
+
+
+
+
+
+
+
 
 
 
