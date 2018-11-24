@@ -76,45 +76,40 @@ message.channel.send(embed)
 
 
 });
-client.on('message', function(msg) {
-  if(msg.content.startsWith (prefix  + 'server')) {
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(msg.guild.iconURL)
-    .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-    .addField('??** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-    .addField('??** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
-    .addField('??**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-    .addField('??**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-    .addField('??**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-    .addField('??**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-    .addField('??**__ الأونـر__**',`**${msg.guild.owner}**`,true)
-    .addField('??**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-    .addField('??**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
-    msg.channel.send({embed:embed});
-  }
-});
- client.on('message', message => {
-    if (message.content.startsWith(prefix + "bot")) {
-    message.channel.send({
-        embed: new Discord.RichEmbed()
-            .setAuthor(client.user.username,client.user.avatarURL)
-            .setThumbnail(client.user.avatarURL)
-            .setColor('RANDOM')
-            .setTitle('``INFO Rqmi, System ©`` ')
-            .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
-            .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
-            .addField('``servers``', [client.guilds.size], true)
-            .addField('``channels``' , `[ ${client.channels.size} ]` , true)
-            .addField('``Users``' ,`[ ${client.users.size} ]` , true)
-            .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
-            .addField('``My ID``' , `[ ${client.user.id} ]` , true)
-			      .addField('``My Prefix``' , `[ ! ]` , true)
-			      .addField('``My Language``' , `[ Java Script ]` , true)
-			      .setFooter('By | Baron')
-    })
-}
-});
+    client.on("message", async message => {
+        if(!message.channel.guild) return;
+ var prefix= "$";
+        if(message.content.startsWith(prefix + 'server')) {
+        let guild = message.guild
+        let channel = message.channel
+        let guildicon = guild.icon_url
+        let members = guild.memberCount
+        let bots = guild.members.filter(m => m.user.bot).size
+        let humans = members - bots
+        let allchannels = guild.channels.size
+        let textchannels = guild.channels.filter(e => e.type === "text")
+        let voicechannels = guild.channels.filter(e => e.type === "voice")
+          var embed = new Discord.RichEmbed()
+          .setColor("#000000")
+          .setTitle(`معلومات عن السيرفر`)
+          .setDescription(`معلومات عن : ${guild.name}`)
+          .addField("صاحب السيرفر :", `${guild.owner}`, true)
+          .addField("أيدي السيرفر :", `${guild.id}`, true)
+          .addField("موقع السيرفر :", `${guild.region}`, true)
+          .addField("مستوى حماية السيرفر :", `${guild.verificationLevel}`, true)
+          .addField("عدد الرومات الصوتية :", `${voicechannels.size}`, true)
+          .addField("عدد الرومات الكتابية :", `${textchannels.size}`, true)
+          .addField("عدد اعضاء السيرفر :", `${members}`, true)
+          .addField("عدد البوتات :", `${bots}`, true)
+          .addField("عدد الاشخاص :", `${humans}`, true)
+          .addField("عدد رتب السيرفر :", `${guild.roles.size}`, true)
+          .addField(`أيموجيات الخاصة بالسيرفر : (${guild.emojis.size})`, `- ${guild.emojis.array()}`, true)
+          .setFooter(`تم انشاء هذه السيرفر في: ${guild.createdAt}`)
+ 
+       message.channel.send({ embed: embed });
+ 
+      }
+    });
  client.on('message', message => {
               if (!message.channel.guild) return;
       if(message.content =='!count')
@@ -2938,8 +2933,236 @@ message.channel.sendFile(canvas.toBuffer())
 
 
 
+client.on('message',message =>{
+    var prefix = "!";
+    if(message.content.startsWith(prefix + 'topinv')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("https://images-ext-1.discordapp.net/external/fAbYyUSkOdX1xi3Z9CoX-LKZNsDoMbws552fjoDV1j8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/507641615570042885/12f651b4c8d3ef90a5b2fccee9be4b7c.png")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
 
 
+var prefix = "!";
+client.on('message', message => {
+         if (message.content === prefix + "date") {
+         if (!message.channel.guild) return message.reply('** This command only for servers **');  
+         var currentTime = new Date(),
+            hours = currentTime.getHours() + 4 ,
+            hours2 = currentTime.getHours() + 3 ,
+            hours3 = currentTime.getHours() + 2 ,
+            hours4 = currentTime.getHours() + 3 ,
+            minutes = currentTime.getMinutes(),
+            seconds = currentTime.getSeconds(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+             var h = hours
+  if(hours > 12) {
+               hours -= 12;
+            } else if(hours == 0) {
+                hours = "12";
+            }  
+             if(hours2 > 12) {
+               hours2 -= 12;
+            } else if(hours2 == 0) {
+                hours2 = "12";
+            
+            }  
+                         if(hours3 > 12) {
+               hours3 -= 12;
+            } else if(hours3 == 0) {
+                hours3 = "12";
+            } 
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+
+            var suffix = 'صباحاَ';
+            if (hours >= 12) {
+                suffix = 'مساء';
+                hours = hours - 12;
+            }
+            if (hours == 0) {
+                hours = 12;
+            }
+ 
+
+                var Date15= new Discord.RichEmbed()
+                .setThumbnail("https://i.imgur.com/ib3n4Hq.png") 
+                .setTitle( "?التاريخ  والوقت?")
+                .setColor('RANDOM')
+                .setFooter(message.author.username, message.author.avatarURL)
+                .addField('الامارات',
+                "?"+ hours + ":" + minutes +":"+ seconds + "?")
+                 .addField('مكه المكرمه',
+                "?"+ hours2 + ":" + minutes +":"+ seconds  + "?") 
+                .addField('مصر',
+                "?"+ hours3 + ":" + minutes +":"+ seconds  + "?") 
+                
+                .addField('التاريخ',
+                "?"+ Day + "-" + Month + "-" + Year +  "?")
+
+                 message.channel.sendEmbed(Date15);
+        }
+    });
+
+
+	
+	
+	
+	client.on('message', message => {
+  if(message.content == '!menbans'){
+      message.guild.fetchBans().then(bans => {
+          bans.forEach(user => {
+             message.channel.send('\`#\` <@'+ user.id + '>');
+          });
+      });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+client.on('message', message => {
+    var prefix = '!';
+if (message.content.startsWith(prefix + "nickname" && prefix + "nick")) {
+  let args = message.content.split(' ').slice(1).join(' ');
+  let args2 = message.content.split(' ').slice(2).join(' ');
+if (message.member.hasPermission("CHANGE_NICKNAME")) {
+  let mention = message.mentions.members.first();
+
+  let clientbot = message.guild.me
+  if (clientbot.hasPermission("MANAGE_NICKNAMES")) {
+    if (message.mentions.users.size === 0) {
+      if (args.length === 0) {
+        if (message.member.nickname != null) {
+          message.member.setNickname(args2)
+          const embed = new Discord.RichEmbed()
+          .setColor("#fff")
+          .setTitle(" أمثله على الأوامر : ")
+          .setDescription(`
+          **+nick** : لحذف اسمك في السيرفر
+          **+nickname @Moha Someone** : لتغيير اسم شخص ما في السيرفر`)
+          .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+
+        message.channel.send({ embed: embed }); 
+      } else {
+        const embed1 = new Discord.RichEmbed()
+        .setTitle("No Succes!")
+        .setColor("#fff")
+        .setDescription("**:x: | لا يمكنني حذف اسمك لانه لا يوجد آسم من الأصل**")
+
+        message.channel.send({ embed: embed1 });
+      }
+    } else {
+      if (args.length < 32) {
+        if (message.author.id === message.guild.owner.id) {
+          const embed2 = new Discord.RichEmbed()
+          .setColor("#fff")
+          .addField("**:x: | ? Permission Error ?**", `**Because you are the owner of the guild, I can't change your nickname!**`)
+          message.channel.send({ embed: embed2 });
+        } else {
+          message.member.setNickname(args)
+          const embed3 = new Discord.RichEmbed()
+            .setColor("#fff")
+            .setTitle("Succes!")
+            .setDescription(`**:white_check_mark:| Nickname changed to:** **${args}**`)
+            message.channel.send({ embed: embed3 });
+        }
+      } else {
+        const embed4 = new Discord.RichEmbed()
+          .setColor("#fff")
+          .setDescription("**:x: | يجب آن يكون عدد الأحرف لا يتعدى 32 حرفاّ**")
+          message.channel.send({ embed: embed4 });
+      }
+    }
+} else {
+  if (message.member.hasPermission("MANAGE_NICKNAMES")) {
+    if (clientbot.hasPermission("MANAGE_NICKNAMES")) {
+      if (args2.length === 0) {
+        let mentionednick1 = message.mentions.members.first()
+        let mgn1 = message.guild.members.get(mentionednick1.id)
+          if (mgn1.nickname != null) {
+            mgn1.setNickname(args2)
+              const embed5 = new Discord.RichEmbed()
+                .setColor("#fff")
+                .setTitle("Succes!")
+                .setDescription(`**:white_check_mark:| Nickname of ${mgn1.user.username} Removed!\nDefault Username:** **${mgn1.user.username}**`)
+
+          message.channel.send({ embed: embed5 });
+        } else {
+          mgn1.setNickname(args2)
+          const embed6 = new Discord.RichEmbed()
+          .setTitle("No Succes!")
+          .setDescription(`**:x: | Can't remove the username of\n${mgn1.user.username} because he/she doesn't have a nickname!**`)
+          .setColor("#fff")
+
+        message.channel.send({ embed: embed6 });
+      }
+    } else {
+      let embed7 = message.mentions.members.first()
+      let mgn2 = message.guild.members.get(mentionednick2.id)
+      mgn2.setNickname(args2)
+      const args2nickname = new Discord.RichEmbed()
+        .setColor("#fff")
+        .setTitle("Succes!")
+        .setDescription(`**:white_check_mark:| Nickname of ${mgn2.user.username} changed to:** **${args2}**`)
+
+        message.channel.send({ embed: embed7 });
+      }
+    } else {
+      const embed8 = new Discord.RichEmbed()
+        .setColor("#fff")
+        .addField("**:x: |  ? Permission Error ?**", `**I don't have perms to change nicknames of other users!\nNeeded Permission:** **MANAGE_NICKNAMES**`)
+
+        message.channel.send({ embed: embed8 });
+    }
+} else {
+  const embed9 = new Discord.RichEmbed()
+    .setColor("#fff")
+    .addField("**:x: | ? Permission Error ?**", `**You don't have perms to change nicknames of other users!\nNeeded Permission:** **MANAGE_NICKNAMES**`)
+
+    message.channel.send({ embed: embed9 });
+  }
+}
+} else {
+  const embed10 = new Discord.RichEmbed()
+    .setColor("#fff")
+    .addField("**:x: | ? Permission Error ?**", `**I don't have perms to change nicknames!\nNeeded Permission:** **MANAGE_NICKNAMES**`)
+    message.channel.send({ embed: embed10 });
+}
+} else {
+message.react("?")
+}
+}
+});
 
 
 
