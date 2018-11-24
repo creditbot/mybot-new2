@@ -35,7 +35,7 @@ var ti={}
 
 client.on('ready', function(){
     var ms = 60000 ;
-    var setGame = [`${client.guilds.size} Server`,'!help','Type !help',`${client.users.size} Members`,'!inv','By: Mohamed | MohamedSamaYT'];
+    var setGame = [`${client.guilds.size} Server`,'!help','Type !help',`${client.users.size} Members`,'!inv','By: Drak '];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -54,8 +54,6 @@ client.on('ready', function(){
  console.log(` ????????????????????? |> Channels: ${client.channels.size}`);
  console.log(` ???????????????????? |> Channels: ${client.channels.size}`);
  console.log(` ???????????????????? |> Id: ${client.user.id}`);
- console.log(` ???????????????????`);
- console.log(` ???????????????????`);
 });
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) { /// This is The DMS Code Send The Help In DMS // Code By NotGucci
@@ -2643,4 +2641,22 @@ client.on('guildMemberAdd', member => {
 return channel.send("**`افضل موقع بيديك حسابات مجانا لكل الالعاب ال ممكن تتخيلها` \n [https://to.free-gg.com/VYOeHU0]**")
     }
     )});
+	client.on("message", message => {
+            var args = message.content.substring(prefix.length).split(" ");
+            if (message.content.startsWith(prefix + "clear")) {
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **ليس لديك صلاحيات**');
+        var msg;
+        msg = parseInt();
+      
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+      message.channel.sendMessage("", {embed: {
+        title: "Done | تــم",
+        color: 0x06DF00,
+        description: "تم مسح الرسائل بنجاح",
+        footer: {
+          text: "Rqmi, System"
+        }
+      }}).then(msg => {msg.delete(3000)});
+                          }
+});
 client.login(process.env.BOT_TOKEN)
