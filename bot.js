@@ -2930,18 +2930,6 @@ message.channel.sendFile(canvas.toBuffer())
 })
 
 
-	client.on('message', message => {
-  if(message.content == '!menbans'){
-      message.guild.fetchBans().then(bans => {
-          bans.forEach(user => {
-             message.channel.send('\`#\` <@'+ user.id + '>');
-          });
-      });
-  }
-});
-
-
-
 
 
 client.login(process.env.BOT_TOKEN)
