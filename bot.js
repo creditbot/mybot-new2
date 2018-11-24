@@ -2742,6 +2742,43 @@ client.on('message',async message => {
 
 
 
+client.on("message", message => {
+  if (message.content === "!help") {
+         message.react("?")
+            message.react("??")
+   const embed = new Discord.RichEmbed() 
+       .setColor("#ffff00")
+       .setDescription(`
+ 
+
+???????????????????????????
+       اوامر البوت
+
+اوامر العامة
+  **!help-public**
+  
+اوامر ادارية
+  **!help-admin**
+
+أوامر الأغاني
+ **!help-music**
+
+???????????????????????????
+  `)
+  .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+     
+     
+    message.author.sendEmbed(embed)
+     
+    }
+    }); 
+
+
+
+
+
+
+
 
 
 client.login(process.env.BOT_TOKEN)
