@@ -3428,9 +3428,49 @@ message.channel.sendFile(canvas.toBuffer())
 	
 	
 	
+	client.on('message', message => {    
+    var p = "!";
+            if (message.content.startsWith(p + "cto")) {
+                if(!message.channel.guild) return;
+                if (!message.member.hasPermission("MANAGE_CHANNEL"))  return;
+      var a= message.content.split(' ').slice(1).join("  ");
+      if (!a) return message.reply("اكتب كلام لوضعه في التوبيك!")
+      message.channel.setTopic(`${a}`)
+      .then(newChannel => message.channel.send(`تم تغيير التوبيك لـ **${a}**`))
+      .catch(console.error);
+            }
+        });
 	
 	
 	
+	client.on('message', message => {
+    if(!message.channel.guild) return;
+let args = message.content.split(' ').slice(1).join(' ');
+if (message.content.startsWith('-allbc')){
+if(!message.author.id === '417232164845781012') return;
+message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
+}
+});
+
+
+
+client.on('message', msg => {
+    if (msg.content === 'حبيبي') {
+      msg.reply('**لاتحتك يا اخوي لو سمحت**');
+    }
+  });
+
+
+
+
+client.on('message', msg => {
+    if (msg.content === 'احبك') {
+      msg.reply('**لاتحتك يا اخوي لو سمحت**');
+    }
+  });
 	
 	
 
