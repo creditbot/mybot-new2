@@ -3253,6 +3253,73 @@ message.channel.sendFile(canvas.toBuffer())
 	
 	
 	
+	
+	
+	
+	
+	      client.on('message', message => {
+        var prefix = "!";
+        if(message.content.startsWith(prefix + 'mutevoice')) {
+          if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**:x: ").then(m => m.delete(5000));
+          if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+           
+        if(message.mentions.users.size === 0) {
+          return message.reply("Please mention a user to mute.");
+        }
+        let muteMember = message.guild.member(message.mentions.users.first());
+        if(!muteMember) {
+          return message.reply("Try again.");
+        }
+        muteMember.setMute(true);
+        if(muteMember) {
+          message.channel.sendMessage("User muted successfully.");
+        }
+      }
+    });
+    client.on('message', message => {
+      var prefix = "!";
+      if(message.content.startsWith(prefix + 'unmutevoice')) {
+        if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**:x: ").then(m => m.delete(5000));
+        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+         
+      if(message.mentions.users.size === 0) {
+        return message.reply("Please mention a user to mute.");
+      }
+      let muteMember = message.guild.member(message.mentions.users.first());
+      if(!muteMember) {
+        return message.reply("Try again.");
+      }
+      muteMember.setMute(false);
+      if(muteMember) {
+        message.channel.sendMessage("User muted successfully.");
+      }
+    }
+  });
+  
+  
+  
+  
+  
+  client.on('message', message => {
+  var prefix = "!";
+  if(message.content.startsWith(prefix + 'move all')) {
+   if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
+     if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
+  if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+   var author = message.member.voiceChannelID;
+   var m = message.guild.members.filter(m=>m.voiceChannel)
+   message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+   m.setVoiceChannel(author)
+   })
+   .setColor("#fff")
+   .setTitle("Succes!")
+   .setDescription(`**:white_check_mark:| تم سحب جميع الأعضاء الى الروم الصوتي الخاص بك`)
+             .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+  
+   }
+     });
+	
+	
 
 
 
