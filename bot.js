@@ -3299,25 +3299,16 @@ message.channel.sendFile(canvas.toBuffer())
   
   
   
-  
   client.on('message', message => {
-  var prefix = "!";
-  if(message.content.startsWith(prefix + 'move all')) {
-   if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
-     if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
-  if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
-   var author = message.member.voiceChannelID;
-   var m = message.guild.members.filter(m=>m.voiceChannel)
-   message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
-   m.setVoiceChannel(author)
-   })
-   .setColor("#fff")
-   .setTitle("Succes!")
-   .setDescription(`**:white_check_mark:| تم سحب جميع الأعضاء الى الروم الصوتي الخاص بك`)
-             .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-  
-   }
-     });
+  if(message.content == '!menbans'){
+      message.guild.fetchBans().then(bans => {
+          bans.forEach(user => {
+             message.channel.send('\`#\` <@'+ user.id + '>');
+          });
+      });
+  }
+});
+
 	
 	
 
