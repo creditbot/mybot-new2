@@ -3374,40 +3374,7 @@ message.channel.sendFile(canvas.toBuffer())
 	
 	
 	
-	if (message.content.startsWith(`${prefix}rmc`))
-    {
-let mentions = message.content.split(" ").slice(1,2).join(" ")
-        var members = []
-        const linkreg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi
-        if (members.includes(message.author.id)) return message.reply(`Please wait for reporting another user.`)
-        let evidence = message.content.split(" ").slice(2,3).join(" ")
-        let reason = message.content.split(" ").slice(3).join(" ")
-        if (!mentions) return message.reply(`**f!rmc [IGN] [Evidence URL] [Reason/Message]**`)
-        if (!reason) return message.reply(`**f!rmc [IGN] [Evidence URL] [Reason/Message]**`)
-        if(!evidence.match(linkreg)) return message.channel.send("**f!rmc [IGN] [Evidence URL] [Reason/Message]**")
-        if(!evidence) return message.reply(`Please include evidence in your report.`)
-        var MojangAPI = require('mojang-api');
-var date = new Date();
-date.setMonth(0); // 0 = January
-MojangAPI.uuidAt(mentions, date, function(err, res) {
-    if (err)
-        return message.channel.send(":mag_right: | **We couldn't found " + "``" + `${mentions}` + "``**")
-    else {
-        let namemc = `https://namemc.com/profile/${res.id}`
-        var embed = new Discord.RichEmbed()
-            .setThumbnail("https://d1u5p3l4wpay3k.cloudfront.net/minecraft_de_gamepedia/7/7c/Grasblock.png")
-            .setTitle(`Minecraft Report - ${mentions}`)
-            .setURL(namemc)
-            .setDescription(`**<@!${message.author.id}> has reported ${mentions}**`)
-            .addField(`Reason`, `\`\`${reason}\`\` `)
-            .addField(`Evidence`, evidence)
-            .setColor(`GREEN`)
-            client.channels.get("435156627558105128").send(embed)
-            members.push(message.author.id);
-            message.channel.send(`${mentions} has been reported.`)
-        }
-        });
-    }
+	
 	
 	
 	
