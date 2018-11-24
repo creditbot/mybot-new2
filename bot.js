@@ -2818,5 +2818,24 @@ let welcomer = member.guild.channels.find("name","welcome");
       });
 	  
 	  
+	  
+	  
+	  
+	  
+	  client.on('message', function(message) {
+    if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        var iiMo = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setTimestamp()
+        .setTitle('``I have received a new DM !``')
+        .setThumbnail(`${message.author.avatarURL}`)
+        .setDescription(`\n\n\`\`\`${message.content}\`\`\``)
+        .setFooter(`From **${message.author.tag} (${message.author.id})**`)
+    client.channels.get("515791391692161025").send({embed:iiMo});
+    }
+});
+	  
+	  
 
 client.login(process.env.BOT_TOKEN)
