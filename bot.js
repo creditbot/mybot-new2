@@ -502,36 +502,17 @@ message.react("?")
  }}});
  
  
+ client.on('message',async message => {
+  if(message.author.bot || message.channel.type === '!bc') return;
+  let args = message.content.split(' ');
+  if(args[0] === `!bc`) {
+    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('- **أنت لا تملك الصلاحيات اللازمة لأستخدام هذا الأمر**');
+    if(!args[1]) return message.channel.send('- **يجب عليك كتابة الرسالة بعد الأمر**');
  
- 
- 
-
- 
-client.on('message', message => {
-  if(!message.channel.guild) return;
-if(message.content.startsWith('!bc')) {
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
-let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let copy = "Rqmi, System";
-let request = `Requested By ${message.author.username}`;
-if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
-msg.react('✅')
-.then(() => msg.react('❌'))
-.then(() =>msg.react('✅'))
-
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-reaction1.on("collect", r => {
-message.channel.send(`☑ | Done ... The Broadcast Message Has Been Sent For ${message.guild.members.size} Members`).then(m => m.delete(5000));
-message.guild.members.forEach(m => {
-var bc = new
     let msgCount = 0;
     let errorCount = 0;
     let successCount = 0;
-	    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
+    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
       message.guild.members.forEach(g => {
         g.send(args.slice(1).join(' ')).then(() => {
           successCount++;
@@ -541,18 +522,13 @@ var bc = new
           errorCount++;
           msgCount++;
           msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
-Discord.RichEmbed()
-.setColor('RANDOM')
-.setTitle('برودكاست')
-.addField('🚩السيرفر🚩', message.guild.name)
-.addField('🔰المرسل🔰', message.author.username)
-.addField('👑الرسالة👑', args)
-.setThumbnail(message.author.avatarURL)
-.setFooter(copy, client.user.avatarURL);
-m.send({ embed: bc })
-msg.delete();
-})
-})
+        });
+      });
+    });
+  }
+});
+ 
+
 reaction2.on("collect", r => {
 message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
 msg.delete();
@@ -2764,6 +2740,135 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
 
  
  
+ 
+ 
+ 
+ 
+ 
+ client.on('message', message => {
+
+    if(message.content.startsWith(prefix + 'id')) {
+if(!message.channel.guild) return;
+      var args = message.content.split(" ").slice(1);
+      let user = message.mentions.users.first();
+      var men = message.mentions.users.first();
+         var heg;
+         if(men) {
+             heg = men
+         } else {
+             heg = message.author
+         }
+       var mentionned = message.mentions.members.first();
+          var h;
+         if(mentionned) {
+             h = mentionned
+         } else {
+             h = message.member
+         }
+  moment.locale('ar');
+    const w = ['../id1.png','../id2.png','../id3.png','../id4.png','../id5.png']
+        let Image = Canvas.Image,
+            canvas = new Canvas(500, 500),
+            ctx = canvas.getContext('2d');
+        ctx.patternQuality = 'bilinear';
+        ctx.filter = 'bilinear';
+        ctx.antialias = 'subpixel';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 2;
+        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
+            if (err) return console.log(err);
+            let BG = Canvas.Image;
+            let ground = new Image;
+            ground.src = Background;
+            ctx.drawImage(ground, 0, 0, 500, 500);
+
+})
+                let url = h.user.displayAvatarURL.endsWith(".webp") ? h.user.displayAvatarURL.slice(5, -20) + ".png" : h.user.displayAvatarURL;
+                jimp.read(url, (err, ava) => {
+                    if (err) return console.log(err);
+                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                        if (err) return console.log(err);
+  //time dateformet
+  const millis = new Date().getTime() - h.user.createdAt.getTime();
+  const now = new Date();
+  dateFormat(now, 'dddd, mmmm dS, yyyy');
+  const stats2 = ['online', 'Low', 'Medium', 'Insane'];
+  const days = millis / 1000 / 60 / 60 / 24;
+            dateFormat(now, 'dddd, mmmm dS, yyyy');
+            
+        
+                          //دخولك الديسكورد
+                          var day = `منذ ${days.toFixed(0)} يوم`
+                          ctx.font = '27px Arial Bold';
+                          ctx.fontSize = '30px';
+                          ctx.fillStyle = "#ffffff";
+                          ctx.textAlign = "center";
+                          ctx.fillText(day, 109, 97)
+              //wl
+              var millis1;
+        if(mentionned){
+            var millis1 = new Date().getTime() - mentionned.joinedAt
+        } else {
+            var millis1 = new Date().getTime() - moment(message.member.joinedAt);;
+            
+        }
+
+  const days1 = millis1 / 1000 / 60 / 60 / 24;
+  
+                        //دخولك السيرفر
+                        var day2 = `منذ ${days1.toFixed(0)} يوم`
+                        ctx.font = '27px Arial Bold';
+                        ctx.fontSize = '20px';
+                        ctx.fillStyle = "#ffffff";
+                        ctx.textAlign = "center";
+                        ctx.fillText(day2, 388, 97); 
+
+                        //ur name
+                        ctx.font = '27px BlowBrush';
+                        ctx.fontSize = '30px';
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.textAlign = "center";
+                        ctx.fillText(h.user.username, 245, 365);
+                        //tag
+                        ctx.font = '27px Arial Bold';
+                        ctx.fontSize = '45px';
+                        ctx.fillStyle = "#ffffff";
+                        ctx.textAlign = "center";
+                        ctx.fillText(`#${heg.discriminator}`, 120, 450);
+                        
+                        //حالتك
+                           let status;
+    if (h.presence.status === 'online') {
+        status = 'اون لاين';
+    } else if (h.presence.status === 'dnd') {
+        status = 'مشغول';
+    } else if (h.presence.status === 'idle') {
+        status = 'خمول';
+    } else if (h.presence.status === 'offline') {
+        status = 'اوف لاين';
+    }
+                        ctx.font = '27px Arial Bold';//ALPHACODE
+                        ctx.fontSize = '30px';
+                        ctx.fillStyle = "#ffffff";
+                        ctx.textAlign = "center";
+                        ctx.fillText(`${status}`, 380, 450);//ALPHACODE
+                        
+                        //Avatar
+                        let Avatar = Canvas.Image;
+                        let ava = new Avatar;
+                        ava.src = buf;
+                        ctx.beginPath();
+                        ctx.arc(250, 238, 64, 0, Math.PI*2, true); //ALPHACODE
+                        ctx.closePath();
+                        ctx.clip();
+                        ctx.drawImage(ava, 185, 172, 130, 130 );
+                         
+     message.channel.sendFile(canvas.toBuffer())//ALPHACODE
+})
+   })
+
+} });
  
  
  
