@@ -3684,91 +3684,42 @@ channelCreated = ra3deyad.createdAt
 	
 	
 	
-	client.on("message", message => {
-    if (message.author.bot) return;
-     if (message.content === prefix + "help-important") {
-  const embedss2 = new Discord.RichEmbed() 
-      .setColor("RANDOM")
-      .setThumbnail(message.author.avatarURL)
-      .setDescription(`**
+	client.on('message' , message => {
+  var prefix = "!";
+  if(message.author.bot) return;
+  if(message.content.startsWith(prefix + "send")) {
+    let args = message.content.split(" ").slice(1);
+
+
+    let suggestmessage = args.join(" ").slice(22);
+    let suggestchannel = message.mentions.channels.first();
+
+    if (!suggestchannel) {
+        return message.reply("Please Mention the channel!")
+    }
+
+    if (!suggestmessage) {
+        return message.reply("Plase Give Text To send Channel!")
     
-     Check Your DM**`)
+         
+    }
+     message.delete();
+suggestchannel.send("@everyone  `||` @here ");
+    let embed = new Discord.RichEmbed()
+        .addField("**", `${suggestmessage}`)
+        .setFooter(`by ${message.author.tag}`)
+        .setTimestamp()
+    suggestchannel.send({
+        embed
+    }).then(msg => {
+        msg.react("✅").then(r => msg.react("❎"))
+    });
 
-		 message.channel.send(`<@${message.author.id}>`, {embed : embedss2});
-  const embed = new Discord.RichEmbed() 
-      .setColor("RANDOM")
-      .setThumbnail(message.author.avatarURL)
-      .setDescription(`**
-╭
-**╔[❖════════════❖]╗
-                Important  :fire:
-╚[❖════════════❖]╝**
-__to enable welcome message do channel name__
- "welcome"
-__to enable Suggest message do channel name__
-"≄◉♔『≤suggestions≥』♔◉≄"
-__to enable log message do channel name__ "log"**
-════════════════════════════════════════════════════
-__g!Build R »البوت يعمل لك روم__ 
-          ↘↙ بي الشكل دا
-***('Info', 'text');
-('Welcome', 'text');
-('Chat', 'text');
-('bot', 'text');
-('bo7', 'text');
-('pic', 'text');
-('cut', 'text');
-('log', 'text');
-('admin-chat', 'text');
-('▓▬▬▬ADMNS▬▬▬▓', 'voice');
-('Owner - مالك السيرفر', 'voice');
-('Co Owner - نائب الرئيس', 'voice');
-('Dev - مبرمج السيرفر', 'voice');
-('Admin - مشرف', 'voice');
-('Mod - مود', 'voice');
-('▓▬▬▬Other▬▬▬▓', 'voice');
-('[ R E C ] 🎥', 'voice');
-('YouTubers - يوتيوبرز', 'voice');
-('VIP + - كبار الشخصيات بلس', 'voice');
-('VIP - كبار الشخصيات', 'voice');
-('Friends - اصدقاء', 'voice');
-('▓▬▬▬WEL▬▬▬▓', 'voice');
-('Help - مساعدة', 'voice');
-('Ξ〖 اقـتـراحـاتـكمـ 💡 〗', 'voice');
-('▓▬▬▬♚▬▬▬▓', 'voice');
-('♧ Ξ〖 🎤  سواليف 📣  〗', 'voice');
-('♢ Ξ〖 🎤 مواهب 🎵  〗', 'voice');
-('❋ Ξ〖 🎈فعاليات 🏅 〗', 'voice');
-('❋ Ξ〖  🕋 القرآن الكريم  〗', 'voice');
-('▓▬▬▬♛▬▬▬▓', 'voice');
-('☆  Ξ〖 🔞  السجن العام 🔪 〗', 'voice');
-('▓▬▬▬Games▬▬▬▓', 'voice');
-('Clash of Clans | كلاش أوف كلانز', 'voice');
-('Clash Royal | كلاش رويال', 'voice');
-('Hajwala  Online | هجولة أون لاين', 'voice');
-('Bullet force | بولت فورس', 'voice');
-('MTA | ام تي اي', 'voice');
-('Ludo Star | لودو ستار', 'voice');
-('▓▬▬▬Private▬▬▬▓', 'voice');
-('✿Tow✿', 'voice');
-('✿Three✿', 'voice');
-('✿Four✿', 'voice');
-('✿Five✿', 'voice');
-('✿Six✿', 'voice');
-('▓▬▬▬AFK▬▬▬▓', ***
-════════════════════════════════════════════════════════════════════════
-`)
 
-       .setTimestamp()
-       .setFooter(message.author.username, message.author.avatarURL)
-message.author.sendEmbed(embed)
-
-.catch(() => {
-  message.channel.send('🚫الخاص مغلق');
-});
-
+    message.reply(`Your message is sended.`).then(msg => msg.delete(1000));
+    return;
 }
-}); 
+});
 	
 	
 	
