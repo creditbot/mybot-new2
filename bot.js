@@ -3727,6 +3727,32 @@ suggestchannel.send("@everyone  `||` @here ");
 	
 	
 	
+	
+	 client.on('guildMemberRemove', member => {
+            var embed = new Discord.RichEmbed()
+            .setAuthor(member.user.username, member.user.avatarURL)
+            .setThumbnail(member.user.avatarURL)
+            .setTitle(`:wave:  😔`)
+            .setImage('https://cdn.pg.sa/GeQGucQhBR.gif') 
+            .setDescription(`Bye Bye  😔 `)
+            .addField('👤  --- ',`**[ ${member.guild.memberCount} ]**`,true)
+            .setColor('RED')
+            .setFooter(`==== Gòǒd Luck ♦=====`, 'https://cdn.pg.sa/GeQGucQhBR.gif')
+        
+        var channel =member.guild.channels.find('name', 'welcome')
+        if (!channel) return;
+        channel.send({embed : embed});
+        })
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
