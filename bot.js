@@ -3961,6 +3961,28 @@ message.channel.sendMessage("تم تفعيل الروم بنجاح")
 	});
 	
 	
+	
+	
+	
+	
+	
+	client.on("message", message => {
+ if (message.content === `${prefix}help-rooms`) {
+  const embed = new Discord.RichEmbed() //by ,$ ReBeL ء , ??#4777 'CODES SERVER'
+      .setColor("#678234")//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
+      .setDescription(`
+${prefix}g!Ch لأنشاء الرومات
+${prefix}g!Ch ac1 لتفعيل روم عدد الاعضاء
+${prefix}g!Ch ac2 لتعيل روم الساعة
+${prefix}g!Ch ac3 لتفعيل روم التاريخ
+${prefix}createserver لأنشاء سيرفر كامل
+
+ `)//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
+   message.channel.sendEmbed(embed)//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
+
+   }
+   });
+	
 
 
 
