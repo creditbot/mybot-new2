@@ -3054,8 +3054,7 @@ msg.channel.send(`${item.type}`).then(() => {
                   }
                   });
 				  
-				  
-				  	
+
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","welcome");
       if(!welcomer) return;
@@ -3075,6 +3074,9 @@ let welcomer = member.guild.channels.find("name","welcome");
       }
       });
 	  
+	  
+	  
+
 if (message.content.toLowerCase().startsWith(prefix + `new`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
