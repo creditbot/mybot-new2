@@ -3913,24 +3913,6 @@ if(message.content === '!voice') {
 
 
 
- client.on("message", message => {
- if (message.content === "!help-use") {
-  const embed = new Discord.RichEmbed()
-      .setColor("RANDOM")
-      .setDescription(`
-─════════════ {✯Rqmi,System♧✯} ════════════─
-❖-|welcome|🚩لتفعيل أمر الترحيب أنشاء غرفة أسمها welcome🚩
-❖-|warn|🚩لتفعيل أمر الأنذار أنشأ غرفة أسمها warns🚩
-❖-|Suggestions|🚩لتفعيل الريبورت أنشاء غرفة أسمها suggestions🚩
-❖-|log|🚩لوق لحماية سيرفرك من تهكير اذا حد طرد شخص يظهر لك مين هو وأشياذ كثيرة🚩
-❖-|طلب|🚩 لتفعيل روم الطلب
-─════════════ {✯Rqmi, System♧✯} ════════════─
-      `)
-   message.channel.sendEmbed(embed)
-    }
-   });
-	
-	
 	
 	
 	
@@ -4033,6 +4015,97 @@ if(message.content === '!voice') {
 	
 	
 	
+	
+	
+	
+	client.on('message', message => {
+    var command = message.content.split(" ")[0];
+    var args1 = message.content.split(" ").slice(1).join(" ");
+    if(command == prefix + 'find') {
+        let sizePlayers = 1;
+        
+        if(message.author.bot) return;
+        if(!message.channel.guild) return;
+        if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}find (اي حرف من الاسم الي تبيه)`).then(msg => msg.delete(5000));
+        
+        var playersFind = new Discord.RichEmbed()
+        .setTitle(`:white_check_mark: **خاصية البحث عن الاعضاء**`)
+        .setThumbnail(client.user.avatarURL)
+        .setDescription(`**\n➥ البحث عن الاعضاء الموجود بداخل اسمائهم:**\n " ${args1} "\n\n**➥ عدد الاعضاء:**\n " ${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).size} "\n\n\`\`\`════════════════════════════════════════════════════════════════════════════════════════\n\n${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).map(m=>sizePlayers++ + '. ' + m.user.tag).slice(0,20).join('\n') || 'لا يوجد اعضاء بهذه الاحرف'}\n\n════════════════════════════════════════════════════════════════════════════════════════\`\`\``)
+        .setColor('GRAY')
+        .setTimestamp()
+        .setFooter(message.author.tag, message.author.avatarURL)
+        
+        message.channel.send(playersFind);
+        message.delete();
+    }
+});
+	
+	
+	
+	
+	
+	const voice = JSON.parse(fs.readFileSync("./voicerank.json", "utf8"));
+ var returned;
+client.on('voiceStateUpdate', (user, member) => {
+  if(member.selfDeaf || member.selfMute || member.serverDeaf || member.serverMute) {
+    returned = false;
+  }
+  if(!member.selfDeaf || !member.selfMute ||!member.serverDeaf || !member.serverMute) {
+    returned = true;
+  }
+  setInterval(() => {
+    if(returned === true) {
+      if(member.bot) return;
+      if(!member.voiceChannel) returned = false;
+      if(!voice[member.id]) voice[member.id] = {
+        xp: 1,
+        level: 1
+      };
+      voice[member.id] = {
+        xp: voice[member.id].xp + Math.floor(Math.random() * 4) + 1,
+        level: voice[member.id].level
+      };
+      var curXp = voice[member.id].xp;
+      var curLvl = voice[member.id].level;
+      if(curXp >= 300) {
+        voice[member.id] = {
+          xp: 1,
+          level: curLvl + 1
+        };
+      }
+      fs.writeFile('./voicerank.json', JSON.stringify(voice, null, 4), (e) => {
+        if(e) console.log(e);
+      });
+    } else if(returned === false) {
+      return null;
+    }
+  },5000);
+});
+client.on('message', async message => {
+if(message.author.bot) return;
+if (message.channel.guild) {
+if (message.content.startsWith(prefix + 'voicerank')) {
+message.channel.send(`Your XP : ${voice[message.member.id].xp}
+Your Level : ${voice[message.member.id].level}`);
+        if(e) console.log(e);
+      };
+}});
+ client.on('message', message => {
+if(message.content.startsWith(prefix + "slots")) {
+  let slot1 = ['🍏', '🍇', '🍒', '🍍', '🍅', '🍆', '🍑', '🍓'];
+  let slots1 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let slots2 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let slots3 = `${slot1[Math.floor(Math.random() * slot1.length)]}`;
+  let we;
+  if(slots1 === slots2 && slots2 === slots3) {
+    we = "Win!"
+  } else {
+    we = "Lose!"
+  }
+  message.channel.send(`${slots1} | ${slots2} | ${slots3} - ${we}`)
+}
+});
 
 	
 	
