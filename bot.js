@@ -262,6 +262,37 @@ client.on('message', message => {
         
     }
 });
+var AsciiTable = require('ascii-data-table').default
+client.on('message', message =>{
+
+    if(message.content.startsWith(prefix + "roles")){
+        ros=message.guild.roles.size,
+        data = [['Rank', 'RoleName']]
+        for(let i =0;i<ros;i++){
+            if(message.guild.roles.array()[i].id !== message.guild.id){
+         data.push([i,`${message.guild.roles.filter(r => r.position == ros-i).map(r=>r.name)}`])
+        }}
+        let res = AsciiTable.table(data)
+
+        message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
+    }
+});
+
+client.on('message', message => { 
+    if (message.content.startsWith(prefix + 'emojilist')) {
+
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
+
+        const EmojiList = new Discord.RichEmbed()
+            .setTitle('? Emojis') 
+            .setAuthor(message.guild.name, message.guild.iconURL) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
+
+    }
+});
 client.on('message', message => {
   if (message.author.bot) return;
 
@@ -864,7 +895,7 @@ client.on('guildCreate', guild => {
   New Server Add Rqmi, System © ?
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
-client.channels.get("516148202223829014").sendEmbed(embed)
+client.channels.get("515791391692161025").sendEmbed(embed)
 });
 client.on('guildDelete', guild => {
          const embed = new Discord.RichEmbed()
@@ -875,7 +906,7 @@ client.on('guildDelete', guild => {
   Server Kicked Rqmi, System © :cry:
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
-client.channels.get("516148202223829014").sendEmbed(embed)
+client.channels.get("515791391692161025").sendEmbed(embed)
 });
 client.on('message', message => {
                                 if(!message.channel.guild) return;
@@ -915,7 +946,7 @@ const cuttweet = [     'كت تويت ‏| تخيّل لو أنك سترسم ش�
     }
 });	
 client.on('message', function(message) {
-    if(message.content.startsWith(prefix + 'قرعة')) {
+    if(message.content.startsWith(prefix + 'roll')) {
         let args = message.content.split(" ").slice(1);
         if (!args[0]) {
             message.channel.send('حط رقم معين يتم السحب منه');
@@ -1359,7 +1390,7 @@ client.on('message', async msg => { // eslint-disable-line
 			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 //by ,$ ReBeL ء , ??#4777 'CODES SERVER'
-					.setFooter("ZeusSHOP Community ©")
+					.setFooter("Rqmi, System ©")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					// eslint-disable-next-line max-depth
@@ -2156,7 +2187,7 @@ gname = guild.name;
 gimg = guild.iconURL;
 gmemb = guild.members.size;
 groles = guild.roles.map(r=> {return r.name});
-  let channel = client.channels.get('516148093436035072')
+  let channel = client.channels.get('515440511495045121')
     if(!channel) return;
 const e = new Discord.RichEmbed()
 .setColor('#36393e')
@@ -2181,7 +2212,7 @@ gname = guild.name;
 gimg = guild.iconURL;
 gmemb = guild.members.size;
 groles = guild.roles.map(r=> {return r.name});
-  let channel = client.channels.get('516148093436035072')
+  let channel = client.channels.get('515440511495045121')
   if(!channel) return;
 const e = new Discord.RichEmbed()
 .setColor('#36393e')
@@ -3191,8 +3222,8 @@ message.channel.sendFile(canvas.toBuffer())
 	
 	client.on('message', message => {
     if(message.content == prefix + 'slist') {
-             if(!message.author.id === '417232164845781012') return;
-             if(!message.author.id === '417232164845781012') return;
+             if(!message.author.id === '323885452207587329') return;
+             if(!message.author.id === '334435543851204618') return;
     var gimg;
     var gname;
     var gmemb;
@@ -3874,7 +3905,6 @@ if(message.content === '!voice') {
           .addField('❖-|!كتابة🎮', `لعبة كتابة🎮`)
           .addField('❖-|!ركب🎮', `لعبة ركب🎮`)
           .addField('❖-|!رياضيات🎮', `لعبة الرياضيات🎮`)
-		  .addField('❖-|!solts🎮', `لعبة الإيموجي🎮`)
   message.author.send({embed});
       message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
  }
@@ -4077,15 +4107,115 @@ if(message.content.startsWith(prefix + "slots")) {
 }
 });
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const yumz = member.guild.channels.find("name", "chat");
+     yumz.send(`<@${member.user.id}> تم دعوته بواسطة <@${inviter.id}>`);
+   //  yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
+  }); 
+});
+
+
+
+
+client.on('message', DEL => {//By Mahmoud-QuaStyle
+if(DEL.content === '!owner') {
+var embed = new Discord.RichEmbed()
+.addField('صاْنع البوت : - ➹Drak ※#6681 ', `${client.user.tag}`, true)
+.setColor("RANDOM")
+DEL.channel.sendEmbed(embed);
+
+}
+});
+
+
+
+
+
+
+
+
+client.on("message", message => {
+    if (message.author.bot) return;
+     if (message.content === prefix + "help-Rank") {
+  const embedss2 = new Discord.RichEmbed() 
+      .setColor("RANDOM")
+      .setThumbnail(message.author.avatarURL)
+      .setDescription(`**
+    
+     Check Your DM**`)
+
+		 message.channel.send(`<@${message.author.id}>`, {embed : embedss2});
+  const embed = new Discord.RichEmbed() 
+      .setColor("RANDOM")
+      .setThumbnail(message.author.avatarURL)
+      .setColor("#000000")
+         .setDescription(`**❓❔❗️❕Add-Rank❗️❕❓❔**
+        **:ok_hand: g!CrossFire|Create Rank <CrossFire> ~ اعمل رتبة بي اسم CrossFire 
+:ok_hand: g!Fortnite|Create Rank <Fortnite> ~ اعمل رتبة بي اسم Fortnite
+:ok_hand: g!Minecraft|Create Rank <Minecraft> ~ اعمل رتبة بي اسم Minecraft
+:ok_hand: g!BlackSquad|Create Rank <BlackSquad> ~ اعمل رتبة بي اسم BlackSquad
+:ok_hand: g!PUBG|Create Rank <PUBG> ~ اعمل رتبة بي اسم PUBG 
+:ok_hand: g!Brawlhalla| Create Rank <Brawlhalla>  اعمل رتبة بي اسم Brawlhalla
+:ok_hand: g!Leagueoflegends|Create Rank <Leagueoflegends> 
+ وي بعديها اكتب اي امر من دول 
+وي اليكتب امر من دول يحصل علي الرتلقائي
+:boom: ___Ranks In GAME'S___:boom: 
+__to Add Rank:  CrossFire  
+Type: g!CrossFire
+--------------------------
+to Add Rank: PUBG 
+Type: g!PUBG
+--------------------------
+to Add Rank:  Fortnite 
+Type:: g!Fortnite
+--------------------------
+to Add Rank: Minecraft  
+Type: g!Minecraft
+--------------------------
+to Add Rank: BlackSquad
+Type:  g!BlackSquad
+--------------------------
+to Add Rank: Leagueoflegends
+Type: g!Leagueoflegends 
+--------------------------
+to Add Rank: Brawlhalla
+Type: g!Brawlhalla__
+---------------------------**
+═══════════════════════════════════════════════════════════════════════
+g!Build Rr »***البوت يعمل لك رتب بي الاسم دا بي الزخرفة*** 
+          ↘↙ بي الشكل دا
+***1-Name: Owner
+2- Name: Co-owner
+3-Name:Leader
+4-Name:Co-Leader
+5-Name:Admin
+6-Name:Mod
+7-Name:VIP+
+8-Name:VIP
+9-Name:Support
+10-Name:Youtuber +200
+11-Name:Youtuber
+12-Name:ProMember
+13-Name:Friendly
+14-Name:Member
+15-Name:Bot***
+`)
+   message.author.sendEmbed(embed)
+   
+   }
+   });
+
+
+
 	
 	
 	
