@@ -434,37 +434,6 @@ message.channel.send(
   message.channel.sendEmbed(embed);
     }
 });
-client.on('message' , message => {
-if (message.author.bot) return;
-if (message.content.startsWith(prefix + "contact")) {
-if (!message.channel.guild) return;
-
-
-
-let args = message.content.split(" ").slice(1).join(" ");
-
-
-client.users.get("417232164845781012").send(
-    "\n" + "**" + "? السيرفر :" + "**" +
-    "\n" + "**" + "» " + message.guild.name + "**" +
-    "\n" + "**" + " ? المرسل : " + "**" +
-    "\n" + "**" + "» " + message.author.tag + "**" +
-    "\n" + "**" + " ? الرسالة : " + "**" +
-    "\n" + "**" + args + "**")
-
-let embed = new Discord.RichEmbed()
-     .setAuthor(message.author.username, message.author.avatarURL)
-     .setDescription(':mailbox_with_mail: تم ارسال الرسالة الى صاحب البوت بنجاح')
-     .setThumbnail(message.author.avatarURL)
-     .setFooter("By : Drak")
-                                                
-
-message.channel.send(embed);
-
-
-}
-    
-});
 client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
@@ -934,7 +903,7 @@ client.on('guildDelete', guild => {
      .setTitle('Click Here To Add Bot .!')
      .setURL('https://discordapp.com/oauth2/authorize?client_id=515784137102327812&scope=bot&permissions=387072')
   .setDescription(`**
-  Server Kicked ZeusSHOP Community © :cry:
+  Server Kicked Rqmi, System © :cry:
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
 client.channels.get("515791391692161025").sendEmbed(embed)
@@ -2283,25 +2252,6 @@ client.on('message', message => {
  
  
  
- 
- client.on('message', message => {
-  const port = '25565'
-  if(message.content.startsWith('!mcstats')) {
- const args = message.content.split(" ").slice(1).join(" ")
-    if (!args) return message.channel.send("** يجب كتابة ايدي السيرفر . **");
-        let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(`https://api.minetools.eu/favicon/${args}/25565`)
-        .addField("?? اسم السيرفر",`${args}`,true)
-        .addField("?? بورت السيرفر",`${port}`)
-        .setImage(`http://status.mclive.eu/${args}/${args}/25565/banner.png`)
-        .setFooter(`Rqmi, System`)
-                .setTimestamp()
-    message.channel.send(embed)      
-}})
-
-
-
 
 
 
@@ -3425,7 +3375,7 @@ message.channel.sendFile(canvas.toBuffer())
 	client.on('message', message => {
     if(!message.channel.guild) return;
 let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('-allbc')){
+if (message.content.startsWith('!allbc')){
 if(!message.author.id === '417232164845781012') return;
 message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
 client.users.forEach(m =>{
@@ -3471,119 +3421,6 @@ client.on('message', msg => {
    
    
    
-   
-   
-   let profile = JSON.parse(fs.readFileSync("./profile.json", "utf8"))
-client.on("message", message => {
-  if (message.author.bot) return;
- if(!message.channel.guild)return;
-  if (!profile[message.author.id]) profile[message.author.id] = {
-    tite: 'HypeLC User',
-    rep: 0,
-   reps: 'NOT YET',
-   lastDaily:'Not Collected',
-    level: 0,
-    points: 0,
-    credits: 1,
-  };
-fs.writeFile('./profile.json', JSON.stringify(profile), (err) => {
-if (err) console.error(err);
-})
-});
-client.on("message", (message) => {
-  let men = message.mentions.users.first()
-  if (message.author.bot) return;
-    if (message.author.id === client.user.id) return;
-    if(!message.channel.guild) return;
-if (message.content.startsWith(prefix + 'credit')) {
-  if(men) {
-  if (!profile[men.id]) profile[men.id] = {
-   lastDaily:'Not Collected',
-   credits: 1,
- };
-  }
-  if(men) {
-message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${profile[men.id].credits}$` + "`.**")
-} else {
- message.channel.send(`** ${message.author.username}, your :credit_card: balance` + " is `" + `${profile[message.author.id].credits}$` + "`.**")
-}
-}
-if(message.content.startsWith(prefix + "daily")) {
-
-
-  if(profile[message.author.id].lastDaily != moment().format('day')) {
-   profile[message.author.id].lastDaily = moment().format('day')
-   profile[message.author.id].credits += 310
-    message.channel.send(`**${message.author.username} you collect your \`310\` :dollar: daily pounds**`)
-} else {
-    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
-}
-}
-let cont = message.content.slice(prefix.length).split(" ");
-let args = cont.slice(2);
-let sender = message.author
-if(message.content.startsWith(prefix + 'trans')) {
-          if (!args[0]) {
-            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
-         return;
-           }
-        // We should also make sure that args[0] is a number
-        if (isNaN(args[0])) {
-            message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
-            return; // Remember to return if you are sending an error message! So the rest of the code doesn't run.
-             }
-             if(profile[message.author.id].credits < args[0]) return message.channel.send("**Your Credits is not enough  that**")
-if(args[0].startsWith("-")) return  message.channel.send('**!! I Cant Do it**');
-				 let defineduser = '';
-            let firstMentioned = message.mentions.users.first();
-            defineduser = (firstMentioned)
-            if (!defineduser) return message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
-            if(defineduser.id === message.author.id) return message.channel.send("***Transfering to your self hah ?!***")
-            var mentionned = message.mentions.users.first();
-if (!profile[sender.id]) profile[sender.id] = {}
-if (!profile[sender.id].credits) profile[sender.id].credits = 310;
-fs.writeFile('./profile.json', JSON.stringify(profile), (err) => {
-if (err) console.error(err);
-})
-var x = ['5587' ,' 9978' , '3785' , '7734' , '9864' , '7681' , '3758' , '7834' , '3489' , '1382' , '7389' , '8762' , '0889' , '0388' , '3316' , '0976' , '8603' , '1842' , '4565' , '9524' , '9524' , '0964' , '5930' , '5678' , '9567' , '6099' , '7058' , '0001' , '1324' , '9834' , '7668' , '0378' , '7055' , '9733' , '9876' , '9846' , '9685' , '8574' , '8975' , '9845' , '9862' , '0069' , '0807' , '0673' , '0813' , '1235' , '6879'];
-var x2 = ['5587' ,' 9978' , '3785' , '7734' , '9864' , '7681' , '3758' , '7834' , '3489' , '1382' , '7389' , '8762' , '0889' , '0388' , '3316' , '0976' , '8603' , '1842' , '4565' , '9524' , '9524' , '0964' , '5930' , '5678' , '9567' , '6099' , '7058' , '0001' , '1324' , '9834' , '7668' , '0378' , '7055' , '9733' , '9876' , '9846' , '9685' , '8574' , '8975' , '9845' , '9862' , '0069' , '0807' , '0673' , '0813' , '1235' , '6879'];
-        var x3 = Math.floor(Math.random()*x.length)
-        message.channel.send(` \`${args}\`** : الملبغ**  \n \`${x[x3]}\` ** : اكتب الرقم التالي حتي تتم عملية التحويل **`).then(msg1=> { 
-        var r = message.channel.awaitMessages(msg => msg.content == x2[x3], { maxMatches : 1, time : 60000, errors : ['time'] })
-        r.catch(() => {
-            message.delete()
-            r.delete()
-            msg.delete()
-            message.channel.sendEmbed(embed)
-        })
-        r.then(s=> {
-      var mando = message.mentions.users.id;
-      if  (!profile[defineduser.id]) profile[defineduser.id] = {}
-      if (!profile[defineduser.id].credits) profile[defineduser.id].credits = 200;
-      profile[defineduser.id].credits += (+args[0]);
-      profile[sender.id].credits += (-args[0]);
-      let mariam = message.author.username
-message.channel.send(`**:moneybag: | ${message.author.username}, has transferrerd ` + "`" + args[0] + "$` to " + `<@${defineduser.id}>**`)
-mentionned.send(` :credit_card: | Transfer Receipt \`\`\`You have received ${args[0]} from user ${message.author.username} ; (ID (${message.author.id})\`\`\``);
-               message.channel.sendEmbed(embed)
-        })
-        })
-        
-		
-
-
-
-
-}
-
-      });
-   
-   
-   
-	
-	
-	
-	
 	
 	
 	client.on('message', msg => {
@@ -3747,51 +3584,7 @@ suggestchannel.send("@everyone  `||` @here ");
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	var EpicEdiTeD = {};
-client.on("message", function(message){
-if (message.content.startsWith(prefix + "rank")) {
-    if (!EpicEdiTeD[message.author.id]) {
-        EpicEdiTeD[message.author.id] = {Money:0,Xp:0,Level:0}
-    }
-     var mentionned = message.mentions.users.first();
- 
-      var epic;
-      if(mentionned){
-          var epic = mentionned;
-      } else {
-          var epic = message.author;
- 
-      }
- 
-   
-    var CulLevel = Math.floor(0.25 * Math.sqrt(EpicEdiTeD[message.author.id].Xp +1));
-    if (CulLevel > EpicEdiTeD[message.author.id].Level) {EpicEdiTeD[message.author.id].Level +=CulLevel}
-    let edited = new Discord.RichEmbed()
-    .setColor("Random")
-    .addField("Nâmè :↙", message.author.tag)
-    .addField("Lèvèl↙ :", EpicEdiTeD[message.author.id].Level)
-    .addField("Xp :↙",Math.floor(EpicEdiTeD[message.author.id].Xp))
-    message.channel.send(edited);
-}
-if (!EpicEdiTeD[message.author.id]) {
-    EpicEdiTeD[message.author.id] = {Money:0,Xp:0,Level:0,Like:0}
-    }
- 
-EpicEdiTeD[message.author.id].Xp+= 0.25;
-EpicEdiTeD[message.author.id].Money+= 0.25;
- 
-});
-	
-	
-	
+
 	
 	
 	
@@ -4129,7 +3922,7 @@ if(message.content === prefix + 'مصحف' || message.content === prefix + 'ms7f
 
 client.on('message', message => {
      if (message.author.bot) return;
-    if (message.content.startsWith("رابط")) {
+    if (message.content.startsWith("!رابط")) {
         message.channel.createInvite({
         thing: true,
         maxUses: 1,
@@ -4171,74 +3964,74 @@ if(message.content === '!voice') {
 	
 	
 	
-	client.on('message', message => {
-   let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix + "serch")) {
-let Embed = new Discord.RichEmbed()
-        .setColor(0x36393e);
-    if (!args[0]) {
-        Embed.setFooter(`**للأستعمال : $serch [ Letter ].**`);
-        return message.channel.send(Embed); 
-    }
-
-    if (args[0].length <= 1) {
-        Embed.setFooter(`للأستعمال : $serch [ Letter ].`);
-        return message.channel.send(Embed); 
-    }
-    let array = []; 
-    let number = 0; 
-    message.guild.members.map(m => { 
-        if (m.user.username.toUpperCase().includes(args[0].toUpperCase())) { 
-            number++; 
-            array.push(`${number}. ${m.user.username}`); 
-        }
-    });
-    Embed.setTitle(`نتائج البحث عن : "${args[0]}"`);
-    Embed.setDescription(`\`\`\`${array.slice(0, 30).join(`\n`)}\`\`\``);
-
-    message.channel.send(Embed);
-   
-   }
-}); 
-
 	
 	
-	const hero = new Discord.Client();
-client.on('message',async message => {
-  function timeCon(time) {
-  let days = Math.floor(time % 31536000 / 86400)
-  let hours = Math.floor(time % 31536000 % 86400 / 3600)
-  let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60)
-  let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60)
-  days = days > 9 ? days : '0' + days
-  hours = hours > 9 ? hours : '0' + hours
-  minutes = minutes > 9 ? minutes : '0' + minutes
-  seconds = seconds > 9 ? seconds : '0' + seconds
-  return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
-  };
-  if(message.content.startsWith( prefix + "bot")) {
-    const millis = new Date().getTime() - client.user.createdAt.getTime();
-    const noww = new Date();
-    dateFormat(noww, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
-    const createdAT = millis / 1000 / 60 / 60 / 24;
-    var iMs = new Discord.RichEmbed()
-    .setAuthor(client.user.username, client.user.avatarURL)
-    .setTitle(`${client.user.username} معلومات عن بوت`)
-    .setColor('#36393e')
-    .addField('🌟 امر البوت', prefix, true)
-    .addField('🌟 الرامات المستخدمة', `${(process.memoryUsage().rss / 1048576).toFixed()} ميجا بايت`,true)
-    .addField('🌟 سرعة البوت', `${Math.round(client.ping)} ملي سكند`,true)
-    .addField('🌟 تم تشغيل البوت منذ', `${timeCon(process.uptime())}`, true)
-    .addField('🌟 السيرفرات', client.guilds.size,true)
-    .addField('🌟 المستخدمين', client.users.size,true)
-    .setFooter(`${client.user.username} :: ${new Date().toLocaleString()}`);
-    message.channel.send(iMs);
-  }
+	client.on("message", message => {
+ if (message.content === "!help-games") {
+  const embed = new Discord.RichEmbed()
+      .setColor("RANDOM")
+      .setDescription('👑اوامر الألعاب👑')
+          .addField('❖-|!صراحة🎮', `لعبة صراحه🎮`)
+          .addField('❖-|!عواصم🎮', `لعبة عواصم🎮`)
+	  .addField('❖-|!عقاب🎮', `لعبة عقاب🎮`)
+          .addField('❖-|!خواطر🎮', `لعبة خواط🎮`)
+          .addField('❖-|!حب🎮', `لعبة الحب🎮`)
+	  .addField('❖-|!كت تويت🎮', `لعبة كت تويت🎮`)
+	  .addField('❖-|!لو خيروك🎮', `لعبة لو خيروك🎮`)
+          .addField('❖-|!قرعة🎮', `لاستعمال القرعة🎮`)
+          .addField('❖-|!فكك🎮', `لعبة فكك🎮`)
+          .addField('❖-|!لغز🎮', `لعبة لغز🎮`)
+          .addField('❖-|!شقلب🎮', `لعبة شقلب🎮`)
+          .addField('❖-|!كتابة🎮', `لعبة كتابة🎮`)
+          .addField('❖-|!ركب🎮', `لعبة ركب🎮`)
+          .addField('❖-|!رياضيات🎮', `لعبة الرياضيات🎮`)
+  message.author.send({embed});
+      message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
+ }
 });
+
+
+
+
+ client.on("message", message => {
+    var prefix = "!";
+ if (message.content === "=help-use") {
+  const embed = new Discord.RichEmbed()
+      .setColor("RANDOM")
+      .setDescription(`
+─════════════ {✯Rqmi,System♧✯} ════════════─
+❖-|welcome|🚩لتفعيل أمر الترحيب أنشاء غرفة أسمها welcome🚩
+❖-|warn|🚩لتفعيل أمر الأنذار أنشأ غرفة أسمها warns🚩
+❖-|Suggestions|🚩لتفعيل الريبورت أنشاء غرفة أسمها suggestions🚩
+❖-|log|🚩لوق لحماية سيرفرك من تهكير اذا حد طرد شخص يظهر لك مين هو وأشياذ كثيرة🚩
+─════════════ {✯Rqmi, System♧✯} ════════════─
+      `)
+   message.channel.sendEmbed(embed)
+    }
+   });
 	
 	
 	
 	
+	
+	client.on("message", message => {
+ if (message.content === "!help-music") {
+  const embed = new Discord.RichEmbed()
+      .setColor("RANDOM")
+      .setDescription('👑أوامر الموسيقى👑')
+	  .addField('❖-|!play', `🎸لتشغيل أغنية برآبط أو بأسم🎵`)
+	  .addField('❖-|!skip', `♠لتجآوز الأغنية الحآلية🎺`)
+	  .addField('❖-|!pause', `🚩إيقآف الأغنية مؤقتا💯`)
+	  .addField('❖-|!resume', `🎧لموآصلة الإغنية بعد إيقآفهآ مؤقتا🎵`)
+          .addField('❖-|!vol', `🔊تغيير درجة الصوت 100 - 0🔇`)
+          .addField('❖-|!stop', `🔘لإخرآج البوت من الروم❗`)
+          .addField('❖-|!queue', `🎸لمعرفة قآئمة التشغيل🎤`)
+          .addField('❖-|!music', `🔰لأرسال الأوامر بلشات🔰`)
+  message.author.send({embed});
+      message.channel.send(":white_check_mark: | Check Your DM تم الأرسال بلخاص")
+
+ }
+});
 	
 
 	
