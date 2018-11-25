@@ -1556,36 +1556,6 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 
 });
 
-client.on("message", message => {
- if (message.content === `${prefix}music`) {
-  const embed = new Discord.RichEmbed() //by ,$ ReBeL ء , ??#4777 'CODES SERVER'
-      .setColor("#678234")//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
-      .setDescription(`
-${prefix}play ? ????لتشغيل أغنية برآبط أو بأسم????
-${prefix}skip ? ??لتجآوز الأغنية الحآلية??
-${prefix}pause ? ??إيقآف الأغنية مؤقتا??
-${prefix}resume ? ??لموآصلة الإغنية بعد إيقآفهآ مؤقتا??
-${prefix}vol ? ??لتغيير درجة الصوت 100 - 0??
-${prefix}stop ? ??لإخرآج البوت من الروم??
-${prefix}np ? ??لمعرفة الأغنية المشغلة حآليا??
-${prefix}queue ? ?لمعرفة قآئمة التشغيل?
-
- `)//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
-   message.channel.sendEmbed(embed)//by ,$ ReBeL ء , ??#4777 'CODES SERVER'
-
-   }
-   });
- client.on('message', message => {
-            if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('!users')){
- if(!message.author.id === '417232164845781012') return;
-message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
-}
-});
 client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
@@ -1840,56 +1810,6 @@ possibleInvites.push([inviteCount, exec]);
 
      }
        });
-client.on('message' , async message => {
-            if(message.content.startsWith(prefix + "ads")) {
-     await message.channel.send("`ارسال الرساله .`").then(e => {
-    let filter = m => m.author.id === message.author.id
-    let tests = '';
-    let time = '';
-    let channel = '';
-    let chaTests = message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-    .then(collected => {
-      tests = collected.first().content
-      collected.first().delete()
-e.edit("`تكرار الرساله كل ....... دقائق`")
-let chaTime = message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-.then(co => {
-if(isNaN(co.first().content)) return message.reply("`الوقت بالدقائق ! ارقام فقطٍ`");
-if(co.first().content > 1500 || co.first().content < 1) return message.channel.send("`لا اقل من دقيقه ولا اكثر من يوم`")
-  time = co.first().content
-co.first().delete()
-  e.edit("`ادخل اسم الروم`")
-  let chaChannel = message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
-.then(col => {
-  channel = col.first().content
-col.first().delete()
-  e.edit("`جاري اعداد المعلومات الرجاء الانتظاار...`").then(b => {
-              setTimeout(() => {
-    b.edit(`** تم اعداد المعلومات بنجاح .**`)
-        },2000);
-  })
-  var room = message.guild.channels.find('name' , channel)
-  if(!room) return;
-  if (room) {
-setInterval(() => {
-room.send(tests);
-}, time*60000)
-  }
-})
-})
-})
-        
-})
-}
-});
-client.on('message', message => {
-if(message.content.includes("<@417232164845781012>")) {
-message.channel.startTyping()
-setTimeout(() => { 
-message.channel.stopTyping()
-}, 7000);
-}
-});
 var json = JSON.parse(fs.readFileSync("json.json", "utf8"));
 
 client.on("message", (message) => {
@@ -3994,8 +3914,7 @@ if(message.content === '!voice') {
 
 
  client.on("message", message => {
-    var prefix = "!";
- if (message.content === "=help-use") {
+ if (message.content === "!help-use") {
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
       .setDescription(`
@@ -4004,6 +3923,7 @@ if(message.content === '!voice') {
 ❖-|warn|🚩لتفعيل أمر الأنذار أنشأ غرفة أسمها warns🚩
 ❖-|Suggestions|🚩لتفعيل الريبورت أنشاء غرفة أسمها suggestions🚩
 ❖-|log|🚩لوق لحماية سيرفرك من تهكير اذا حد طرد شخص يظهر لك مين هو وأشياذ كثيرة🚩
+❖-|طلب|🚩 لتفعيل روم الطلب
 ─════════════ {✯Rqmi, System♧✯} ════════════─
       `)
    message.channel.sendEmbed(embed)
@@ -4034,6 +3954,8 @@ if(message.content === '!voice') {
 });
 	
 
+	
+	
 	
 	
 
