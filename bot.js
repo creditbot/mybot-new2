@@ -262,37 +262,6 @@ client.on('message', message => {
         
     }
 });
-var AsciiTable = require('ascii-data-table').default
-client.on('message', message =>{
-
-    if(message.content.startsWith(prefix + "roles")){
-        ros=message.guild.roles.size,
-        data = [['Rank', 'RoleName']]
-        for(let i =0;i<ros;i++){
-            if(message.guild.roles.array()[i].id !== message.guild.id){
-         data.push([i,`${message.guild.roles.filter(r => r.position == ros-i).map(r=>r.name)}`])
-        }}
-        let res = AsciiTable.table(data)
-
-        message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
-    }
-});
-
-client.on('message', message => { 
-    if (message.content.startsWith(prefix + 'emojilist')) {
-
-        const List = message.guild.emojis.map(e => e.toString()).join(" ");
-
-        const EmojiList = new Discord.RichEmbed()
-            .setTitle('? Emojis') 
-            .setAuthor(message.guild.name, message.guild.iconURL) 
-            .setColor('RANDOM') 
-            .setDescription(List) 
-            .setFooter(message.guild.name) 
-        message.channel.send(EmojiList) 
-
-    }
-});
 client.on('message', message => {
   if (message.author.bot) return;
 
@@ -895,7 +864,7 @@ client.on('guildCreate', guild => {
   New Server Add Rqmi, System © ?
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
-client.channels.get("515791391692161025").sendEmbed(embed)
+client.channels.get("516148202223829014").sendEmbed(embed)
 });
 client.on('guildDelete', guild => {
          const embed = new Discord.RichEmbed()
@@ -906,7 +875,7 @@ client.on('guildDelete', guild => {
   Server Kicked Rqmi, System © :cry:
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
-client.channels.get("515791391692161025").sendEmbed(embed)
+client.channels.get("516148202223829014").sendEmbed(embed)
 });
 client.on('message', message => {
                                 if(!message.channel.guild) return;
@@ -946,7 +915,7 @@ const cuttweet = [     'كت تويت ‏| تخيّل لو أنك سترسم ش�
     }
 });	
 client.on('message', function(message) {
-    if(message.content.startsWith(prefix + 'roll')) {
+    if(message.content.startsWith(prefix + 'قرعة')) {
         let args = message.content.split(" ").slice(1);
         if (!args[0]) {
             message.channel.send('حط رقم معين يتم السحب منه');
@@ -2187,7 +2156,7 @@ gname = guild.name;
 gimg = guild.iconURL;
 gmemb = guild.members.size;
 groles = guild.roles.map(r=> {return r.name});
-  let channel = client.channels.get('515440511495045121')
+  let channel = client.channels.get('516148093436035072')
     if(!channel) return;
 const e = new Discord.RichEmbed()
 .setColor('#36393e')
@@ -2212,7 +2181,7 @@ gname = guild.name;
 gimg = guild.iconURL;
 gmemb = guild.members.size;
 groles = guild.roles.map(r=> {return r.name});
-  let channel = client.channels.get('515440511495045121')
+  let channel = client.channels.get('516148093436035072')
   if(!channel) return;
 const e = new Discord.RichEmbed()
 .setColor('#36393e')
@@ -3222,8 +3191,8 @@ message.channel.sendFile(canvas.toBuffer())
 	
 	client.on('message', message => {
     if(message.content == prefix + 'slist') {
-             if(!message.author.id === '323885452207587329') return;
-             if(!message.author.id === '334435543851204618') return;
+             if(!message.author.id === '417232164845781012') return;
+             if(!message.author.id === '417232164845781012') return;
     var gimg;
     var gname;
     var gmemb;
@@ -4112,54 +4081,10 @@ if(message.content.startsWith(prefix + "slots")) {
 	
 	
 	
-	client.on('message',   eyad =>{
-    
-    var  args = eyad.content.split(" ").slice(2).join(" ")
-    var men = eyad.mentions.users.first()|| client.users.get(eyad.content.split(' ')[1])
-    var  mas = eyad.author
-                              if(eyad.content == '!sar7') {
-                              if(eyad.channel.type === "dm"){
-if(!args) return  eyad.channel.send(":black_medium_square: **قم بوضع رسالة الصراحة **");
-if(!men) return  eyad.channel.send(":black_medium_square:**قم بوضع ايدي المراد مصارحتة , ربما يكون الشخص غير موجود في سيرفرات مشتركة بينك وبينة لذلك لن يستطيع البوت الأرسال** ");
-                      var currentTime = new Date(),
-            Year = currentTime.getFullYear(),
-            Month = currentTime.getMonth() + 1,
-            Day = currentTime.getDate();
-     var eyadandr3d = new Discord.RichEmbed()
-     .setAuthor(eyad.author.username , eyad.author.avatarURL)
-     .setThumbnail(men.avatarURL)
-     .setDescription(`**:black_medium_square:  هل انت موافق لآرسال هذه الصراحة  ؟  \nمحتوي الرسالة : ${args}**`)
-     .setTimestamp() 
-     .setFooter(`- By , message.author.name .`)
-     eyad.channel.send(eyadandr3d).then(message => {
- message.react('✅').then(r=>{
- message.react('❌').then(r=>{            
-    var kk = (reaction, user) => reaction.emoji.name === '✅' && user.id === eyad.author.id;    
-    var nn = (reaction, user) => reaction.emoji.name === '❌' && user.id === eyad.author.id;
-    var kkk = message.createReactionCollector(kk, { time: 60000 });
-    var nnn = message.createReactionCollector(nn, { time: 60000 });
-kkk.on("collect", r => {
-          const embed = new Discord.RichEmbed()
-               .setThumbnail("https://cdn.discordapp.com/attachments/429056808561278979/450412294078332948/download.jpg")   
-               .setColor("RANDOM")
-               .addField('**• السلام عليكم ** ', `<@${men.id}>` , true)
-                    .addField('**• لقد قام شخص ما بمصارحتك **' ,       ` __${args}__ ` , true)
-                    .addField('**• تاريخ المصارحة**' , Day + "-" + Month + "-" + Year , true)
-          client.users.get(men.id).sendEmbed(embed)
-          eyad.reply(`لقد تم ارسال الصراحه للشخص \n <@${men.id}>`)
-message.delete()
-          eyad.delete();
-})
-nnn.on("collect", r => {
-message.delete()
-eyad.reply("`تم الغاء الصراحة`")
-eyad.delete();
-})
-})
-}) 
-})
-}}
-});
+	
+	
+	
+	
 	
 	
 	
